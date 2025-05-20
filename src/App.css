@@ -1,0 +1,173 @@
+/* src/App.css */
+
+/* Genel sayfa ayarları */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0d1b2a; /* Particles yüklenmeden önce veya hata durumunda arka plan */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Sol Menü Stilleri (Geçici) */
+.sidebar {
+  width: 80px; /* Örnek genişlik */
+  background-color: rgba(0, 0, 0, 0.5); /* Yarı şeffaf arka plan */
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed; /* Sabit konum */
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 1; /* İçeriğin üstünde olması için */
+}
+
+.sidebar-item {
+    color: gold;
+    margin-bottom: 20px;
+}
+
+
+/* Ana İçerik Alanı Stilleri */
+.main-content {
+  flex-grow: 1; /* Kalan alanı kapla */
+  display: flex;
+  justify-content: center; /* İçeriği yatayda ortala */
+  align-items: center; /* İçeriği dikeyde ortala */
+  padding: 20px;
+  margin-left: 80px; /* Sidebar genişliği kadar boşluk bırak */
+  z-index: 0; /* Arka planın üstünde ama sidebar'ın altında */
+  /* Resimdeki ortalanmış kutunun stilini burada veya .intro-box'ta yapacağız */
+}
+
+.intro-box {
+    background-color: rgba(0, 0, 0, 0.7); /* Yarı şeffaf kutu */
+    padding: 40px;
+    border-radius: 15px; /* Köşe yuvarlaklığı */
+    text-align: center; /* Metinleri ortala */
+    max-width: 600px; /* Maksimum genişlik */
+    /* Resimdeki gibi tam ortalamak için margin auto kullanılabilir veya flexbox ayarlamaları */
+    margin: auto; /* Yatayda otomatik ortalama */
+}
+
+.intro-box h1 {
+    color: white; /* Resimdeki gibi beyaz */
+    font-size: 3em; /* Büyük başlık */
+    margin-bottom: 0.5em;
+}
+
+.intro-box h2 {
+    color: gold; /* Resimdeki gibi altın sarısı */
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+.intro-box p {
+    color: lightgray;
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 2em;
+}
+
+.buttons {
+    margin-bottom: 2em;
+}
+
+.btn {
+    background-color: rgba(255, 215, 0, 0.8); /* Altın sarısı gibi */
+    color: #0d1b2a; /* Koyu arka plan rengi gibi */
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.social-icons {
+    margin-top: 1em;
+}
+
+.social-icon {
+  color: white;
+    font-size: 1.5em; /* İkon boyutu */
+    margin: 0 10px;
+    text-decoration: none; /* Alt çizgiyi kaldır */
+}
+
+/* Sağdaki Sabit İkonlar (Geçici) */
+.right-icons {
+   position: fixed; /* Sabit konum */
+   right: 20px; /* Sağdan boşluk */
+   top: 50%; /* Dikeyde ortala (transform ile daha hassas olabilir) */
+   transform: translateY(-50%); /* Kendi yüksekliğinin yarısı kadar yukarı kaydır */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   z-index: 1;
+}
+
+.right-icon-item {
+    color: gold;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+
+/* Responsive için temel ayarlar (İhtiyaca göre geliştirilecek) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+  .main-content {
+    margin-left: 60px;
+    padding: 10px;
+  }
+  .intro-box {
+      padding: 20px;
+  }
+  .intro-box h1 {
+      font-size: 2em;
+  }
+   .intro-box h2 {
+      font-size: 1.2em;
+  }
+   .intro-box p {
+      font-size: 1em;
+  }
+  .btn {
+      padding: 8px 15px;
+      font-size: 0.9em;
+  }
+  .social-icon {
+      font-size: 1.2em;
+  }
+   .right-icons {
+       right: 10px;
+   }
+    .right-icon-item {
+        font-size: 1.2em;
+  }
+
+}
