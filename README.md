@@ -1,3 +1,32 @@
+# 🌌 Gülheda'nın Kişisel Portfolyo Web Sitesi
+
+Merhaba!  
+Bu proje, **React** ile geliştirilmiş, modern ve profesyonel bir kişisel portfolyo web sitesidir.  
+Amacım; yazılım, yapay zeka, drone ve diğer teknoloji alanlarındaki yeteneklerimi, projelerimi ve deneyimlerimi etkileyici bir şekilde sergilemek.
+
+## 🚀 Özellikler
+
+- **Galaksi/Güneş Temalı Hareketli Video Arka Planı:**  
+  Ziyaretçileri ilk anda etkileyen, dikkat çekici ve modern bir atmosfer.
+- **Minimal ve Şık Sidebar Menü:**  
+  Sadece ikonlardan oluşan, sade ve profesyonel bir navigasyon.
+- **Responsive Tasarım:**  
+  Tüm cihazlarda (mobil, tablet, masaüstü) kusursuz görünüm.
+- **Öne Çıkan Profil ve Sosyal Medya:**  
+  Profil fotoğrafı, isim ve sosyal medya bağlantılarıyla kişisel marka vurgusu.
+- **Projeler, Yetenekler ve İletişim:**  
+  Kolayca ulaşılabilen, sade ve okunabilir içerik bölümleri.
+
+## 🛠️ Kullanılan Teknolojiler
+
+- React
+- CSS3 (modern, responsive tasarım)
+- (Ekleyebileceğin diğer teknolojiler: ör. Framer Motion, Styled Components, vs.)
+
+## 🔗 Canlı Demo
+
+[Portfolyo Web Sitesini Görüntüle](https://gulheda.com.tr)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
