@@ -9,6 +9,8 @@ import Skills from "./pages/Skills";
 import NelerYapabilirim from "./pages/NelerYapabilirim";
 import Sidebar from "./components/Sidebar";
 import RightBar from "./components/RightBar";
+import LanguageSelector from "./components/LanguageSelector";
+import { LanguageProvider } from "./context/LanguageContext";
 import "./App.css";
 
 const PageTransition = ({ children }) => {
@@ -79,105 +81,108 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      {/* Arka Plan Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          objectFit: "cover",
-          zIndex: 0,
-          filter: "brightness(0.7) blur(1.5px)",
-          pointerEvents: "none"
-        }}
-      >
-        <source src="/1.mp4" type="video/mp4" />
-      </video>
-      {/* Karartma Overlay */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          background: "radial-gradient(ellipse at 60% 40%, rgba(255,200,80,0.15) 0%, rgba(13,27,42,0.7) 100%)",
-          zIndex: 1,
-          pointerEvents: "none"
-        }}
-      />
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <LoadingScreen key="loading" />
-        ) : (
-          <div className="app" style={{ position: "relative", zIndex: 2 }}>
-            <Sidebar />
-            <main className="main-content">
-              <AnimatePresence mode="wait">
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <PageTransition>
-                        <Home />
-                      </PageTransition>
-                    }
-                  />
-                  <Route
-                    path="/about"
-                    element={
-                      <PageTransition>
-                        <About />
-                      </PageTransition>
-                    }
-                  />
-                  <Route
-                    path="/skills"
-                    element={
-                      <PageTransition>
-                        <Skills />
-                      </PageTransition>
-                    }
-                  />
-                  <Route
-                    path="/portfolio"
-                    element={
-                      <PageTransition>
-                        <Portfolio />
-                      </PageTransition>
-                    }
-                  />
-                  <Route
-                    path="/contact"
-                    element={
-                      <PageTransition>
-                        <Contact />
-                      </PageTransition>
-                    }
-                  />
-                  <Route
-                    path="/neleryapabilirim"
-                    element={
-                      <PageTransition>
-                        <NelerYapabilirim />
-                      </PageTransition>
-                    }
-                  />
-                </Routes>
-              </AnimatePresence>
-            </main>
-            <RightBar />
-          </div>
-        )}
-      </AnimatePresence>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        {/* Arka Plan Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            objectFit: "cover",
+            zIndex: 0,
+            filter: "brightness(0.7) blur(1.5px)",
+            pointerEvents: "none"
+          }}
+        >
+          <source src="/1.mp4" type="video/mp4" />
+        </video>
+        {/* Karartma Overlay */}
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "radial-gradient(ellipse at 60% 40%, rgba(255,200,80,0.15) 0%, rgba(13,27,42,0.7) 100%)",
+            zIndex: 1,
+            pointerEvents: "none"
+          }}
+        />
+        <AnimatePresence mode="wait">
+          {isLoading ? (
+            <LoadingScreen key="loading" />
+          ) : (
+            <div className="app" style={{ position: "relative", zIndex: 2 }}>
+              <Sidebar />
+              <main className="main-content">
+                <AnimatePresence mode="wait">
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={
+                        <PageTransition>
+                          <Home />
+                        </PageTransition>
+                      }
+                    />
+                    <Route
+                      path="/about"
+                      element={
+                        <PageTransition>
+                          <About />
+                        </PageTransition>
+                      }
+                    />
+                    <Route
+                      path="/skills"
+                      element={
+                        <PageTransition>
+                          <Skills />
+                        </PageTransition>
+                      }
+                    />
+                    <Route
+                      path="/portfolio"
+                      element={
+                        <PageTransition>
+                          <Portfolio />
+                        </PageTransition>
+                      }
+                    />
+                    <Route
+                      path="/contact"
+                      element={
+                        <PageTransition>
+                          <Contact />
+                        </PageTransition>
+                      }
+                    />
+                    <Route
+                      path="/neleryapabilirim"
+                      element={
+                        <PageTransition>
+                          <NelerYapabilirim />
+                        </PageTransition>
+                      }
+                    />
+                  </Routes>
+                </AnimatePresence>
+              </main>
+              <RightBar />
+              <LanguageSelector />
+            </div>
+          )}
+        </AnimatePresence>
+      </Router>
+    </LanguageProvider>
   );
 };
 

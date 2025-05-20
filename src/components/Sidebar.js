@@ -1,32 +1,40 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaHome, FaUser, FaCode, FaBriefcase, FaEnvelope, FaStar } from "react-icons/fa";
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 const Sidebar = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const sidebarStyle = {
-    width: "64px",
+    width: "80px",
     height: "100vh",
     position: "fixed",
     left: 0,
     top: 0,
+    bottom: 0,
     background: "rgba(20, 20, 30, 0.32)",
     backdropFilter: "blur(14px)",
     borderRight: "2px solid rgba(255, 215, 0, 0.13)",
     boxShadow: "2px 0 18px 0 rgba(13,27,60,0.13)",
-    padding: "32px 0",
+    padding: "35px 0",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "32px",
-    zIndex: 1000
+    gap: "35px",
+    zIndex: 1000,
+    overflowY: "auto",
+    overflowX: "hidden"
   };
 
   const logoStyle = {
-    fontSize: "2.1rem",
+    fontSize: "2.4rem",
     fontWeight: "bold",
     color: "#ffd700",
     textAlign: "center",
-    marginBottom: "24px",
+    marginBottom: "30px",
     fontFamily: 'Montserrat, Arial, sans-serif',
     textShadow: "0 0 18px #ffd70055, 0 2px 8px #fff2"
   };
@@ -34,19 +42,19 @@ const Sidebar = () => {
   const navStyle = {
     display: "flex",
     flexDirection: "column",
-    gap: "28px"
+    gap: "32px"
   };
 
   const iconBoxStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "44px",
-    height: "44px",
-    borderRadius: "13px",
+    width: "52px",
+    height: "52px",
+    borderRadius: "15px",
     background: "rgba(20, 20, 30, 0.55)",
     border: "2px solid #ffd70033",
-    fontSize: "2rem",
+    fontSize: "2.2rem",
     color: "#ffd700",
     opacity: 0.88,
     cursor: "pointer",
@@ -69,7 +77,7 @@ const Sidebar = () => {
             boxShadow: isActive ? "0 0 24px 2px #ffd70088" : iconBoxStyle.boxShadow,
             border: isActive ? "2.5px solid #ffd700" : iconBoxStyle.border
           })}
-          title="Ana Sayfa"
+          title={t.nav.home}
         >
           <FaHome />
         </NavLink>
@@ -84,7 +92,7 @@ const Sidebar = () => {
             boxShadow: isActive ? "0 0 24px 2px #ffd70088" : iconBoxStyle.boxShadow,
             border: isActive ? "2.5px solid #ffd700" : iconBoxStyle.border
           })}
-          title="Hakkımda"
+          title={t.nav.about}
         >
           <FaUser />
         </NavLink>
@@ -99,7 +107,7 @@ const Sidebar = () => {
             boxShadow: isActive ? "0 0 24px 2px #ffd70088" : iconBoxStyle.boxShadow,
             border: isActive ? "2.5px solid #ffd700" : iconBoxStyle.border
           })}
-          title="Yetenekler"
+          title={t.nav.skills}
         >
           <FaCode />
         </NavLink>
@@ -114,7 +122,7 @@ const Sidebar = () => {
             boxShadow: isActive ? "0 0 24px 2px #ffd70088" : iconBoxStyle.boxShadow,
             border: isActive ? "2.5px solid #ffd700" : iconBoxStyle.border
           })}
-          title="Neler Yapabilirim?"
+          title={t.nav.whatICan}
         >
           <FaStar />
         </NavLink>
@@ -129,7 +137,7 @@ const Sidebar = () => {
             boxShadow: isActive ? "0 0 24px 2px #ffd70088" : iconBoxStyle.boxShadow,
             border: isActive ? "2.5px solid #ffd700" : iconBoxStyle.border
           })}
-          title="Portfolyo"
+          title={t.nav.portfolio}
         >
           <FaBriefcase />
         </NavLink>
@@ -144,7 +152,7 @@ const Sidebar = () => {
             boxShadow: isActive ? "0 0 24px 2px #ffd70088" : iconBoxStyle.boxShadow,
             border: isActive ? "2.5px solid #ffd700" : iconBoxStyle.border
           })}
-          title="İletişim"
+          title={t.nav.contact}
         >
           <FaEnvelope />
         </NavLink>

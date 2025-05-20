@@ -1,95 +1,164 @@
 import React from "react";
-import { FaBrain, FaCogs, FaRobot, FaCode } from "react-icons/fa";
+import { FaBrain, FaCogs, FaRobot, FaPaintBrush } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const abilities = [
-  {
-    icon: <FaBrain size={36} color="#ffa500" />,
-    title: "Yapay Zekâ & Algoritmalar",
-    desc: "Veri analizi, karar verme sistemleri ve öğrenen algoritmalar geliştiriyorum."
-  },
-  {
-    icon: <FaCogs size={36} color="#ffa500" />,
-    title: "Simülasyon Sistemleri",
-    desc: "Gerçek dünyayı sanal ortama taşıyan, test edilebilir simülasyonlar kuruyorum."
-  },
-  {
-    icon: <FaRobot size={36} color="#ffa500" />,
-    title: "Otonom Sistemler",
-    desc: "İHA'lar için görev planlama, kontrol ve ortam algısı üzerine çalışıyorum."
-  },
-  {
-    icon: <FaCode size={36} color="#ffa500" />,
-    title: "Yazılım Geliştirme",
-    desc: "Python ve C# ile fonksiyonel, sürdürülebilir yazılım çözümleri üretiyorum."
-  }
-];
+const NelerYapabilirim = () => {
+  const abilities = [
+    {
+      icon: <FaBrain size={36} color="#ffa500" />,
+      title: "Yapay Zekâ (AI)",
+      desc: "Karar verme sistemleri, öğrenme algoritmaları ve veri odaklı çözümler üzerine çalışmayı seviyorum."
+    },
+    {
+      icon: <FaCogs size={36} color="#ffa500" />,
+      title: "Simülasyon Sistemleri",
+      desc: "Gerçek dünyayı sanal ortama taşıyıp test edebilmek; hem analitik hem yaratıcı düşünmeyi gerektiriyor ve bu denge bana ilham veriyor."
+    },
+    {
+      icon: <FaRobot size={36} color="#ffa500" />,
+      title: "Otonom Sistemler",
+      desc: "Özellikle İHA simülasyonlarında; kontrol, görev planlama ve ortam algısı gibi konularla ilgileniyorum."
+    },
+    {
+      icon: <FaPaintBrush size={36} color="#ffa500" />,
+      title: "Arayüz Tasarımı (UI/UX)",
+      desc: "Kullanıcıya sezgisel ve anlamlı bir deneyim sunmak benim için yazılımın en insani yönü."
+    }
+  ];
 
-const containerStyle = {
-  maxWidth: "900px",
-  margin: "0 auto",
-  padding: "40px 20px",
-  color: "#fff"
-};
+  const pageStyle = {
+    width: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+    position: "relative",
+    zIndex: 10,
+    background: "rgba(10, 10, 10, 0.25)",
+    backdropFilter: "blur(10px)"
+  };
 
-const titleStyle = {
-  color: "#ffa500",
-  fontSize: "2.5rem",
-  fontWeight: "bold",
-  marginBottom: "40px",
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  textAlign: "center"
-};
+  const containerStyle = {
+    maxWidth: "1200px",
+    width: "100%",
+    padding: "40px",
+    position: "relative"
+  };
 
-const gridStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: "32px"
-};
+  const titleStyle = {
+    fontSize: "3rem",
+    fontWeight: "bold",
+    marginBottom: "50px",
+    fontFamily: "Montserrat, Arial, sans-serif",
+    textAlign: "center",
+    background: "linear-gradient(135deg, #ffb649 0%, #ffdc83 50%, #fff2d1 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textShadow: "0 4px 30px rgba(255, 182, 73, 0.3)",
+    position: "relative"
+  };
 
-const cardStyle = {
-  background: "rgba(255,255,255,0.07)",
-  backdropFilter: "blur(10px)",
-  borderRadius: "18px",
-  padding: "32px 24px",
-  border: "1.5px solid rgba(255,255,255,0.10)",
-  boxShadow: "0 4px 24px 0 rgba(0,0,0,0.13)",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  textAlign: "center",
-  transition: "transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s cubic-bezier(.4,0,.2,1)",
-  cursor: "pointer"
-};
+  const gridStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: "30px",
+    width: "100%"
+  };
 
-const cardHover = {
-  transform: "scale(1.05)",
-  boxShadow: "0 8px 32px 0 rgba(255, 215, 0, 0.18)"
-};
+  const cardStyle = {
+    background: "rgba(10, 10, 10, 0.35)",
+    backdropFilter: "blur(15px)",
+    borderRadius: "20px",
+    padding: "35px",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    position: "relative",
+    overflow: "hidden",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+    transition: "all 0.3s ease"
+  };
 
-function NelerYapabilirim() {
+  const iconContainerStyle = {
+    width: "80px",
+    height: "80px",
+    background: "rgba(255, 165, 0, 0.1)",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "25px",
+    position: "relative",
+    boxShadow: "0 0 20px rgba(255, 165, 0, 0.2)"
+  };
+
+  const titleGradientStyle = {
+    fontSize: "1.5rem",
+    fontWeight: "600",
+    marginBottom: "20px",
+    fontFamily: "Montserrat, Arial, sans-serif",
+    background: "linear-gradient(135deg, #ffb649, #ffdc83)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textShadow: "0 2px 15px rgba(255, 182, 73, 0.2)"
+  };
+
+  const descriptionStyle = {
+    color: "rgba(255, 255, 255, 0.85)",
+    fontSize: "1.1rem",
+    lineHeight: "1.6",
+    margin: 0,
+    position: "relative",
+    zIndex: 1
+  };
+
   return (
-    <div style={containerStyle}>
-      <h1 style={titleStyle}>Neler Yapabilirim?</h1>
-      <div style={gridStyle}>
-        {abilities.map((item, i) => (
-          <motion.div
-            key={i}
-            style={cardStyle}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.09 }}
-            whileHover={{ scale: 1.06, boxShadow: "0 0 32px 0 #ffd70099, 0 0 0 6px #222a" }}
-            whileTap={{ scale: 1.13, boxShadow: "0 0 48px 0 #ffd700cc, 0 0 0 10px #222a" }}
-          >
-            {item.icon}
-            <h3 style={{ color: "#ffd700", margin: "18px 0 10px 0", fontSize: "1.3rem" }}>{item.title}</h3>
-            <p style={{ color: "#fff", opacity: 0.92, fontSize: "1.05rem" }}>{item.desc}</p>
-          </motion.div>
-        ))}
+    <div style={pageStyle}>
+      <div style={containerStyle}>
+        <motion.h1
+          style={titleStyle}
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          Neler Yapabilirim?
+        </motion.h1>
+        <div style={gridStyle}>
+          {abilities.map((ability, index) => (
+            <motion.div
+              key={index}
+              style={cardStyle}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{
+                transform: "translateY(-10px)",
+                boxShadow: "0 15px 45px rgba(255, 165, 0, 0.2)",
+                border: "1px solid rgba(255, 165, 0, 0.3)"
+              }}
+            >
+              <motion.div
+                style={iconContainerStyle}
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {ability.icon}
+              </motion.div>
+              <h3 style={titleGradientStyle}>
+                {ability.title}
+              </h3>
+              <p style={descriptionStyle}>
+                {ability.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default NelerYapabilirim; 

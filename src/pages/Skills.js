@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { FaReact, FaNodeJs, FaGitAlt, FaDocker, FaFigma, FaSass, FaRegImages, FaSearch, FaLightbulb, FaBrain, FaPython, FaMicrochip, FaCode, FaCube } from "react-icons/fa";
-import { SiJavascript, SiTypescript, SiMongodb, SiPostgresql, SiRedux, SiJest, SiNextdotjs, SiGraphql, SiAdobephotoshop, SiTailwindcss, SiRos } from "react-icons/si";
+import { FaRegImages, FaSearch, FaLightbulb, FaBrain, FaPython, FaMicrochip, FaCode, FaCube } from "react-icons/fa";
+import { SiRos } from "react-icons/si";
 import { motion, useAnimation } from "framer-motion";
 import "../styles/Skills.css";
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 const Skills = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   // Animasyonlu sayaç için state
   const [reactPercent, setReactPercent] = useState(0);
   useEffect(() => {
@@ -46,8 +51,8 @@ const Skills = () => {
   };
 
   const sectionStyle = {
-    background: "rgba(13, 27, 42, 0.45)",
-    backdropFilter: "blur(16px)",
+    background: "rgba(10, 10, 10, 0.35)",
+    backdropFilter: "blur(15px)",
     borderRadius: "22px",
     padding: "30px 2vw",
     marginBottom: "30px",
@@ -140,16 +145,6 @@ const Skills = () => {
     { name: "Gazebo", icon: <FaCube />, level: 60 }
   ];
 
-  const extraSkills = [
-    { name: "Redux", icon: <SiRedux />, level: 75 },
-    { name: "GraphQL", icon: <SiGraphql />, level: 65 },
-    { name: "Jest", icon: <SiJest />, level: 60 },
-    { name: "Next.js", icon: <SiNextdotjs />, level: 70 },
-    { name: "Sass", icon: <FaSass />, level: 70 },
-    { name: "Photoshop", icon: <SiAdobephotoshop />, level: 60 },
-    { name: "Görsel Tasarım", icon: <FaRegImages />, level: 65 }
-  ];
-
   const researchSkills = [
     { name: "Araştırma", icon: <FaSearch /> },
     { name: "Analitik Düşünme", icon: <FaBrain /> },
@@ -161,16 +156,29 @@ const Skills = () => {
   // styles/Skills.css dosyasına şunu ekleyebilirsin:
   // @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
 
+  const pageStyle = {
+    width: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+    position: "relative",
+    zIndex: 10,
+    background: "rgba(10, 10, 10, 0.25)",
+    backdropFilter: "blur(10px)"
+  };
+
   return (
     <div style={containerStyle}>
       <motion.h1 style={titleStyle} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
-        Yeteneklerim
+        {t.skills.title}
       </motion.h1>
 
       <div style={sectionStyle}>
         <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}>
           <span style={{ color: "#ffd700" }}>✦</span>
-          Teknik Yetenekler
+          {t.skills.programming}
         </motion.h2>
         <div style={skillsGridStyle} className="skills-grid">
           {skills.map((skill, index) => (
@@ -205,35 +213,9 @@ const Skills = () => {
       </div>
 
       <div style={sectionStyle}>
-        <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.25, ease: "easeOut" }}>
-          <span style={{ color: "#ffd700" }}>✦</span>
-          Ekstra Yetenekler
-        </motion.h2>
-        <div style={skillsGridStyle} className="skills-grid">
-          {extraSkills.map((skill, index) => (
-            <motion.div
-              key={index}
-              style={skillCardStyle}
-              whileHover={{ scale: 1.06, boxShadow: "0 8px 32px 0 #ffd70033" }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div style={skillHeaderStyle}>
-                <span style={iconStyle}>{skill.icon}</span>
-                <span style={skillNameStyle}>{skill.name}</span>
-              </div>
-              <div style={progressBarContainerStyle}>
-                <div style={progressBarStyle(skill.level)} />
-              </div>
-              <div style={skillLevelStyle}>{skill.level}%</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <div style={sectionStyle}>
         <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}>
           <span style={{ color: "#ffd700" }}>✦</span>
-          Araştırma & Analitik
+          {t.skills.ai}
         </motion.h2>
         <div style={skillsGridStyle} className="skills-grid">
           {researchSkills.map((skill, index) => (
@@ -257,28 +239,30 @@ const Skills = () => {
       <div style={sectionStyle}>
         <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}>
           <span style={{ color: "#ffd700" }}>✦</span>
-          Yumuşak Beceriler
+          {t.skills.softSkills}
         </motion.h2>
         <div style={skillsGridStyle} className="skills-grid">
           {[
-            "Problem Çözme",
-            "Takım Çalışması",
-            "İletişim",
-            "Zaman Yönetimi",
-            "Sürekli Öğrenme",
-            "Adaptasyon"
+            { name: t.skills.problemSolving, level: 95 },
+            { name: t.skills.teamwork, level: 90 },
+            { name: t.skills.communication, level: 85 },
+            { name: t.skills.research, level: 90 },
+            { name: t.skills.timeManagement, level: 85 },
+            { name: t.skills.adaptability, level: 90 }
           ].map((skill, index) => (
             <motion.div
               key={index}
-              style={{
-                ...skillCardStyle,
-                textAlign: "center",
-                padding: "28px"
-              }}
+              style={skillCardStyle}
               whileHover={{ scale: 1.06, boxShadow: "0 8px 32px 0 #ffd70033" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <span style={{ fontSize: "1.2rem", color: "#fff", fontWeight: "500" }}>{skill}</span>
+              <div style={skillHeaderStyle}>
+                <span style={skillNameStyle}>{skill.name}</span>
+              </div>
+              <div style={progressBarContainerStyle}>
+                <div style={progressBarStyle(skill.level)} />
+              </div>
+              <div style={skillLevelStyle}>{skill.level}%</div>
             </motion.div>
           ))}
         </div>

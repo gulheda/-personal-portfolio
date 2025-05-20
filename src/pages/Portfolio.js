@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 const Portfolio = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
@@ -35,8 +40,8 @@ const Portfolio = () => {
   };
 
   const projectCardStyle = {
-    background: "rgba(255, 255, 255, 0.05)",
-    backdropFilter: "blur(10px)",
+    background: "rgba(10, 10, 10, 0.35)",
+    backdropFilter: "blur(15px)",
     borderRadius: "20px",
     overflow: "hidden",
     border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -79,9 +84,43 @@ const Portfolio = () => {
     transition: "all 0.3s ease"
   };
 
+  const projects = [
+    {
+      title: t.portfolio.project1Title,
+      description: t.portfolio.project1Desc,
+      image: "/images/project1.jpg",
+      link: "https://github.com/yourusername/project1"
+    },
+    {
+      title: t.portfolio.project2Title,
+      description: t.portfolio.project2Desc,
+      image: "/images/project2.jpg",
+      link: "https://github.com/yourusername/project2"
+    },
+    {
+      title: t.portfolio.project3Title,
+      description: t.portfolio.project3Desc,
+      image: "/images/project3.jpg",
+      link: "https://github.com/yourusername/project3"
+    }
+  ];
+
+  const pageStyle = {
+    width: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+    position: "relative",
+    zIndex: 10,
+    background: "rgba(10, 10, 10, 0.25)",
+    backdropFilter: "blur(10px)"
+  };
+
   return (
     <div style={containerStyle}>
-      <h1 style={titleStyle}>Projelerim</h1>
+      <h1 style={titleStyle}>{t.portfolio.title}</h1>
       <div style={projectsGridStyle}>
         {repos
           .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))

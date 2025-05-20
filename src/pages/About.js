@@ -1,8 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaBirthdayCake, FaMapMarkerAlt } from "react-icons/fa";
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 const About = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const containerStyle = {
     maxWidth: "800px",
     margin: "0 auto",
@@ -20,8 +25,8 @@ const About = () => {
   };
 
   const sectionStyle = {
-    background: "rgba(255, 255, 255, 0.05)",
-    backdropFilter: "blur(10px)",
+    background: "rgba(10, 10, 10, 0.35)",
+    backdropFilter: "blur(15px)",
     borderRadius: "20px",
     padding: "30px",
     marginBottom: "30px",
@@ -82,14 +87,27 @@ const About = () => {
     textAlign: "center"
   };
 
+  const pageStyle = {
+    width: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+    position: "relative",
+    zIndex: 10,
+    background: "rgba(10, 10, 10, 0.25)",
+    backdropFilter: "blur(10px)"
+  };
+
   return (
     <div style={containerStyle}>
-      <h1 style={titleStyle}>Hakkımda</h1>
+      <h1 style={titleStyle}>{t.about.title}</h1>
       
       <div style={sectionStyle}>
         <h2 style={sectionTitleStyle}>
           <span style={bulletStyle}>✦</span>
-          Ben Kimim?
+          {t.about.intro}
         </h2>
         <div style={{
           display: "flex",
@@ -104,39 +122,39 @@ const About = () => {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaUser style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>İsim:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.contact.name}:</span>
             <span style={{ color: "#fff" }}>Gülheda Kızılhan</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaEnvelope style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>E-posta:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.contact.email}:</span>
             <span style={{ color: "#fff" }}>kizilhangulheda@gmail.com</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaBirthdayCake style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>Yaş:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.about.age}:</span>
             <span style={{ color: "#fff" }}>21</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaMapMarkerAlt style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>Konum:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.about.location}:</span>
             <span style={{ color: "#fff" }}>Denizli</span>
           </div>
         </div>
         <p style={textStyle}>
-          Merhaba, ben Gülheda. Bilgisayar mühendisliği 2. sınıf öğrencisiyim. Şu anda üniversitemin Teknofest ekibinde, bir İHA'nın simülasyon sistemini geliştiriyorum. Yapay zekâ, insan-merkezli tasarım ve simülasyon teknolojileri özel ilgi alanlarım. Kodla sadece işlev değil; anlam, his ve etki yaratmak istiyorum. Geliştirdiğim projelerde; mühendisliğin yaratıcılıkla birleştiği, sade ama güçlü çözümler üretmeyi önceliklendiriyorum. Gömülü sistemlerle ilgilenmiyorum, daha çok yüksek seviye soyutlama ve algoritmik düşünebileceğim alanlara yöneliyorum.
+          {t.about.description}
         </p>
       </div>
 
       <div style={sectionStyle}>
         <h2 style={sectionTitleStyle}>
           <span style={bulletStyle}>✦</span>
-          Eğitim & Deneyim
+          {t.about.education}
         </h2>
         <ul style={listStyle}>
           <li style={listItemStyle}>
             <span style={bulletStyle}>•</span>
-            Bilgisayar Mühendisliği 2. sınıf öğrencisi, Balıkesir Üniversitesi
+            {t.home.title}, Balıkesir University
           </li>
         </ul>
       </div>
@@ -173,11 +191,10 @@ const About = () => {
       </div>
 
       <motion.h2 style={subtitleStyle}>
-        Bilgisayar Mühendisliği 2. Sınıf Öğrencisi
+        {t.home.title}
       </motion.h2>
       <p style={descriptionStyle}>
-        Yapay zekâ, simülasyon ve otonom sistemlere tutkuyla odaklanıyorum.<br />
-        Teknofest'te İHA simülasyonları geliştiriyor, karmaşık problemleri sade ve etkili çözümlere dönüştürüyorum.
+        {t.home.description}
       </p>
     </div>
   );
