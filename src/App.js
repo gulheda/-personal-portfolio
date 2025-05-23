@@ -72,11 +72,21 @@ const LoadingScreen = () => {
   );
 };
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return isMobile;
+};
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    // Simüle edilmiş yükleme süresi
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -123,64 +133,22 @@ const App = () => {
             <LoadingScreen key="loading" />
           ) : (
             <div className="app" style={{ position: "relative", zIndex: 2 }}>
-              <Sidebar />
+              {!isMobile && <Sidebar />}
               <main className="main-content">
                 <AnimatePresence mode="wait">
                   <Routes>
-                    <Route
-                      path="/"
-                      element={
-                        <PageTransition>
-                          <Home />
-                        </PageTransition>
-                      }
-                    />
-                    <Route
-                      path="/about"
-                      element={
-                        <PageTransition>
-                          <About />
-                        </PageTransition>
-                      }
-                    />
-                    <Route
-                      path="/skills"
-                      element={
-                        <PageTransition>
-                          <Skills />
-                        </PageTransition>
-                      }
-                    />
-                    <Route
-                      path="/portfolio"
-                      element={
-                        <PageTransition>
-                          <Portfolio />
-                        </PageTransition>
-                      }
-                    />
-                    <Route
-                      path="/contact"
-                      element={
-                        <PageTransition>
-                          <Contact />
-                        </PageTransition>
-                      }
-                    />
-                    <Route
-                      path="/neleryapabilirim"
-                      element={
-                        <PageTransition>
-                          <NelerYapabilirim />
-                        </PageTransition>
-                      }
-                    />
+                    <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                    <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+                    <Route path="/skills" element={<PageTransition><Skills /></PageTransition>} />
+                    <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
+                    <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+                    <Route path="/neleryapabilirim" element={<PageTransition><NelerYapabilirim /></PageTransition>} />
                   </Routes>
                 </AnimatePresence>
               </main>
-              <RightBar />
+              {!isMobile && <RightBar />}
               <LanguageSelector />
-              <MobileNavBar />
+              {/* Mobilde menü barı da gösterilmeyecek */}
             </div>
           )}
         </AnimatePresence>

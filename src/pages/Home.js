@@ -124,7 +124,7 @@ const Home = () => {
     );
   }
 
-  // MASAÜSTÜ İÇİN MEVCUT TASARIM
+  // MASAÜSTÜ İÇİN ESKİ TASARIM (HİÇBİR ŞEY DEĞİŞMEYECEK)
   return (
     <motion.div
       initial={{ opacity: 0 }}
