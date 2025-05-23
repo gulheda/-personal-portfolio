@@ -1,163 +1,182 @@
-import React from "react";
-import { FaBrain, FaCogs, FaRobot, FaPaintBrush } from "react-icons/fa";
+import React, { useMemo, useState, useEffect } from "react";
+import { FaCode, FaServer, FaMobile, FaTools } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useLanguage } from '../context/LanguageContext';
 
 const NelerYapabilirim = () => {
-  const abilities = [
+  const { t, language } = useLanguage();
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    console.log('Current language:', language);
+    console.log('Current translations:', t);
+    console.log('Current abilities:', t.abilities);
+  }, [language, t]);
+
+  const abilities = useMemo(() => {
+    console.log('Creating abilities array with:', t.abilities);
+    return [
     {
-      icon: <FaBrain size={36} color="#ffa500" />,
-      title: "Yapay Zekâ (AI)",
-      desc: "Karar verme sistemleri, öğrenme algoritmaları ve veri odaklı çözümler üzerine çalışmayı seviyorum."
+      icon: <FaCode />,
+      title: t.abilities.aiTitle,
+      description: t.abilities.aiDesc,
+      color: '#FF6B6B'
     },
     {
-      icon: <FaCogs size={36} color="#ffa500" />,
-      title: "Simülasyon Sistemleri",
-      desc: "Gerçek dünyayı sanal ortama taşıyıp test edebilmek; hem analitik hem yaratıcı düşünmeyi gerektiriyor ve bu denge bana ilham veriyor."
+      icon: <FaServer />,
+      title: t.abilities.simulationTitle,
+      description: t.abilities.simulationDesc,
+      color: '#4ECDC4'
     },
     {
-      icon: <FaRobot size={36} color="#ffa500" />,
-      title: "Otonom Sistemler",
-      desc: "Özellikle İHA simülasyonlarında; kontrol, görev planlama ve ortam algısı gibi konularla ilgileniyorum."
+      icon: <FaMobile />,
+      title: t.abilities.autonomousTitle,
+      description: t.abilities.autonomousDesc,
+      color: '#45B7D1'
     },
     {
-      icon: <FaPaintBrush size={36} color="#ffa500" />,
-      title: "Arayüz Tasarımı (UI/UX)",
-      desc: "Kullanıcıya sezgisel ve anlamlı bir deneyim sunmak benim için yazılımın en insani yönü."
+      icon: <FaTools />,
+      title: t.abilities.uiuxTitle,
+      description: t.abilities.uiuxDesc,
+      color: '#FFD93D'
     }
-  ];
-
-  const pageStyle = {
-    width: "100%",
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    position: "relative",
-    zIndex: 10,
-    background: "rgba(10, 10, 10, 0.25)",
-    backdropFilter: "blur(10px)"
-  };
-
-  const containerStyle = {
-    maxWidth: "1200px",
-    width: "100%",
-    padding: "40px",
-    position: "relative"
-  };
-
-  const titleStyle = {
-    fontSize: "3rem",
-    fontWeight: "bold",
-    marginBottom: "50px",
-    fontFamily: "Montserrat, Arial, sans-serif",
-    textAlign: "center",
-    background: "linear-gradient(135deg, #ffb649 0%, #ffdc83 50%, #fff2d1 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "0 4px 30px rgba(255, 182, 73, 0.3)",
-    position: "relative"
-  };
-
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "30px",
-    width: "100%"
-  };
-
-  const cardStyle = {
-    background: "rgba(10, 10, 10, 0.35)",
-    backdropFilter: "blur(15px)",
-    borderRadius: "20px",
-    padding: "35px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    position: "relative",
-    overflow: "hidden",
-    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
-    transition: "all 0.3s ease"
-  };
-
-  const iconContainerStyle = {
-    width: "80px",
-    height: "80px",
-    background: "rgba(255, 165, 0, 0.1)",
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: "25px",
-    position: "relative",
-    boxShadow: "0 0 20px rgba(255, 165, 0, 0.2)"
-  };
-
-  const titleGradientStyle = {
-    fontSize: "1.5rem",
-    fontWeight: "600",
-    marginBottom: "20px",
-    fontFamily: "Montserrat, Arial, sans-serif",
-    background: "linear-gradient(135deg, #ffb649, #ffdc83)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "0 2px 15px rgba(255, 182, 73, 0.2)"
-  };
-
-  const descriptionStyle = {
-    color: "rgba(255, 255, 255, 0.85)",
-    fontSize: "1.1rem",
-    lineHeight: "1.6",
-    margin: 0,
-    position: "relative",
-    zIndex: 1
-  };
+    ];
+  }, [t, language]);
 
   return (
-    <div style={pageStyle}>
-      <div style={containerStyle}>
-        <motion.h1
-          style={titleStyle}
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          Neler Yapabilirim?
-        </motion.h1>
-        <div style={gridStyle}>
-          {abilities.map((ability, index) => (
-            <motion.div
-              key={index}
-              style={cardStyle}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{
-                transform: "translateY(-10px)",
-                boxShadow: "0 15px 45px rgba(255, 165, 0, 0.2)",
-                border: "1px solid rgba(255, 165, 0, 0.3)"
-              }}
-            >
-              <motion.div
-                style={iconContainerStyle}
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="container"
+      key={language}
+      style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '40px 20px',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'Montserrat, Inter, Arial, sans-serif'
+      }}
+    >
+      <motion.h1
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="neler-title"
+        key={language}
+        style={{
+          color: '#ffb366',
+          fontWeight: 800,
+          fontSize: '2.5rem',
+          letterSpacing: '0.01em',
+          textShadow: '0 2px 18px #ffb36644, 0 1px 8px #fff2',
+          marginBottom: '38px',
+          textAlign: 'center',
+        }}
+      >
+        {t.abilities.title}
+      </motion.h1>
+
+      <div className="neler-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '32px',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        marginTop: '10px',
+      }}>
+        {abilities.map((ability, index) => (
+          <motion.div
+            key={`${language}-${index}`}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="neler-card"
+            style={{
+              background: 'rgba(20,20,22,0.28)',
+              borderRadius: '18px',
+              padding: '32px 22px 28px 22px',
+              boxShadow: activeIndex === index
+                ? `0 0 32px 8px ${ability.color}55, 0 0 0 4px ${ability.color}33`
+                : `0 4px 18px 0 #000a`,
+              cursor: 'pointer',
+              transition: 'all 0.28s cubic-bezier(.4,0,.2,1)',
+              transform: activeIndex === index ? 'scale(1.045)' : 'scale(1)',
+              border: activeIndex === index ? `2.5px solid ${ability.color}` : '1.5px solid #23232b',
+              outline: activeIndex === index ? `0.5px solid ${ability.color}88` : 'none',
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '260px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+            whileHover={{ y: -7, boxShadow: `0 0 48px 16px ${ability.color}cc, 0 0 0 8px ${ability.color}44`, scale: 1.06 }}
+          >
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '20px',
+            }}>
+              <div style={{
+                width: '70px',
+                height: '70px',
+                borderRadius: '50%',
+                background: '#23232b',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: ability.color,
+                fontSize: '2.2rem',
+                boxShadow: `0 0 18px ${ability.color}33`,
+                border: `2.5px solid ${ability.color}`,
+                marginBottom: '8px',
+              }}>
                 {ability.icon}
-              </motion.div>
-              <h3 style={titleGradientStyle}>
+              </div>
+              <h3 className="neler-card-title" style={{
+                fontSize: '1.25rem',
+                color: ability.color,
+                fontWeight: 700,
+                margin: 0,
+                textAlign: 'center',
+                letterSpacing: '0.01em',
+                textShadow: `0 2px 12px ${ability.color}33`,
+              }}>
                 {ability.title}
               </h3>
-              <p style={descriptionStyle}>
-                {ability.desc}
+              <p className="neler-card-desc" style={{
+                fontSize: '1.05rem',
+                color: '#f3f3f3',
+                lineHeight: '1.6',
+                textAlign: 'center',
+                margin: 0,
+                fontWeight: 400,
+                letterSpacing: '0.01em',
+                textShadow: '0 1px 8px #0004',
+              }}>
+                {ability.description}
               </p>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </div>
+      <style>{`
+        @media (max-width: 900px) {
+          .neler-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </motion.div>
   );
 };
 

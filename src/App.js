@@ -11,7 +11,8 @@ import Sidebar from "./components/Sidebar";
 import RightBar from "./components/RightBar";
 import LanguageSelector from "./components/LanguageSelector";
 import { LanguageProvider } from "./context/LanguageContext";
-import "./App.css";
+import "./styles/App.css";
+import "./styles/MobileResponsive.css";
 
 const PageTransition = ({ children }) => {
   const location = useLocation();

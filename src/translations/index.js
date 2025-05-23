@@ -79,6 +79,17 @@ export const translations = {
       send: 'Gönder',
       success: 'Mesajınız başarıyla gönderildi!',
       error: 'Bir hata oluştu, lütfen tekrar deneyin.'
+    },
+    abilities: {
+      title: 'Neler Yapabilirim?',
+      aiTitle: 'Yapay Zekâ (AI)',
+      aiDesc: 'Karar verme sistemleri, öğrenme algoritmaları ve veri odaklı çözümler üzerine çalışmayı seviyorum.',
+      simulationTitle: 'Simülasyon Sistemleri',
+      simulationDesc: 'Gerçek dünyayı sanal ortama taşıyıp test edebilmek; hem analitik hem yaratıcı düşünmeyi gerektiriyor ve bu denge bana ilham veriyor.',
+      autonomousTitle: 'Otonom Sistemler',
+      autonomousDesc: 'Özellikle İHA simülasyonlarında; kontrol, görev planlama ve ortam algısı gibi konularla ilgileniyorum.',
+      uiuxTitle: 'Arayüz Tasarımı (UI/UX)',
+      uiuxDesc: 'Kullanıcıya sezgisel ve anlamlı bir deneyim sunmak benim için yazılımın en insani yönü.'
     }
   },
   en: {
@@ -161,6 +172,17 @@ export const translations = {
       send: 'Send',
       success: 'Your message has been sent successfully!',
       error: 'An error occurred, please try again.'
+    },
+    abilities: {
+      title: 'What Can I Do?',
+      aiTitle: 'Artificial Intelligence (AI)',
+      aiDesc: 'I enjoy working on decision-making systems, learning algorithms, and data-driven solutions.',
+      simulationTitle: 'Simulation Systems',
+      simulationDesc: 'Transferring the real world to a virtual environment and being able to test it requires both analytical and creative thinking, and this balance inspires me.',
+      autonomousTitle: 'Autonomous Systems',
+      autonomousDesc: 'I am especially interested in UAV simulations; topics like control, mission planning, and environment perception.',
+      uiuxTitle: 'UI/UX Design',
+      uiuxDesc: 'Providing an intuitive and meaningful experience to the user is, for me, the most human aspect of software.'
     }
   },
   ja: {
@@ -243,6 +265,17 @@ export const translations = {
       send: '送信',
       success: 'メッセージが正常に送信されました！',
       error: 'エラーが発生しました。もう一度お試しください。'
+    },
+    abilities: {
+      title: '提供できること',
+      aiTitle: '人工知能 (AI)',
+      aiDesc: '意思決定システム、学習アルゴリズム、データ駆動型ソリューションに取り組むのが好きです。',
+      simulationTitle: 'シミュレーションシステム',
+      simulationDesc: '現実世界を仮想環境に持ち込み、テストできることは、分析的かつ創造的な思考の両方を必要とし、このバランスが私にインスピレーションを与えます。',
+      autonomousTitle: '自律システム',
+      autonomousDesc: '特にUAVシミュレーションに興味があり、制御、ミッション計画、環境認識などのトピックに取り組んでいます。',
+      uiuxTitle: 'UI/UXデザイン',
+      uiuxDesc: 'ユーザーに直感的で意味のある体験を提供することは、私にとってソフトウェアの最も人間的な側面です。'
     }
   }
 }; 

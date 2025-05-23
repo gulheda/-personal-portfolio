@@ -1,228 +1,173 @@
-import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from '../context/LanguageContext';
-import { translations } from '../translations';
+import "../styles/Home.css";
 
 const Home = () => {
-  const { language } = useLanguage();
-  const t = translations[language];
+  const { t, language } = useLanguage();
+  const navigate = useNavigate();
 
-  const containerStyle = {
-    width: "100vw",
-    minHeight: "100vh",
-    color: "#fff",
-    position: "relative",
-    zIndex: 1,
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    padding: "0",
-    margin: "0"
-  };
-
-  const contentStyle = {
-    width: "500px",
-    minHeight: "600px",
-    margin: "0 0 0 96px",
-    textAlign: "left",
-    padding: "50px 45px",
-    background: "rgba(10, 10, 10, 0.25)",
-    backdropFilter: "blur(10px)",
-    borderRadius: "15px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    boxShadow: "0 4px 32px 0 rgba(0,0,0,0.15)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    position: "relative",
-    overflow: "hidden"
-  };
-
-  const titleStyle = {
-    fontSize: "3rem",
-    fontWeight: "bold",
-    marginBottom: "20px",
-    fontFamily: 'Montserrat, Arial, sans-serif',
-    background: "linear-gradient(90deg, #ffa500 10%, #fff 90%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "0 4px 32px rgba(255, 165, 0, 0.18), 0 2px 8px #fff2",
-    filter: "blur(0.2px)",
-    width: "100%"
-  };
-
-  const subtitleStyle = {
-    fontSize: "1.6rem",
-    fontWeight: 700,
-    marginBottom: "35px",
-    fontFamily: 'Montserrat, Arial, sans-serif',
-    background: "linear-gradient(90deg, #ffd700 10%, #fff 90%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "0 2px 16px rgba(255, 215, 0, 0.13), 0 1px 4px #fff2",
-    filter: "blur(0.2px)",
-    width: "100%"
-  };
-
-  const descriptionStyle = {
-    fontSize: "1.15rem",
-    lineHeight: 1.8,
-    color: "rgba(255, 255, 255, 0.95)",
-    marginBottom: "40px",
-    position: "relative",
-    background: "rgba(255, 255, 255, 0.03)",
-    padding: "25px",
-    borderRadius: "12px",
-    border: "1px solid rgba(255, 255, 255, 0.05)",
-    backdropFilter: "blur(5px)"
-  };
-
-  const socialLinksStyle = {
-    display: "flex",
-    gap: "25px",
-    marginTop: "30px",
-    width: "100%",
-    justifyContent: "center",
-    padding: "20px 0 0 0"
-  };
-
-  const socialLinkStyle = {
-    color: "#ffa500",
-    fontSize: "1.8rem",
-    transition: "all 0.3s ease",
-    opacity: 0.85,
-    "&:hover": {
-      opacity: 1,
-      transform: "translateY(-3px)"
-    }
-  };
-
-  const buttonContainerStyle = {
-    display: "flex",
-    gap: "15px",
-    width: "100%",
-    marginBottom: "10px"
-  };
-
-  const terminalButtonStyle = {
-    flex: 1,
-    background: "rgba(35, 39, 46, 0.95)",
-    color: "#ffe066",
-    padding: "16px 24px",
-    borderRadius: "8px",
-    fontSize: "1.1rem",
-    fontWeight: "500",
-    textDecoration: "none",
-    transition: "all 0.3s ease",
-    border: "1.5px solid rgba(255, 215, 0, 0.3)",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-    fontFamily: "Fira Code, monospace",
-    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
-    textAlign: "center"
-  };
+  // Klavye kısayolu: ⌘ + '+' tuşuna bastığında veya Ctrl+Shift+= kombinasyonunda portfolio sayfasına git
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Mac: metaKey + '+', Windows/Linux: ctrlKey + Shift + '='
+      if ((e.metaKey || e.ctrlKey) && (e.key === '+' || (e.key === '=' && e.shiftKey))) {
+        e.preventDefault();
+        navigate('/portfolio');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [navigate]);
 
   return (
     <motion.div
-      style={containerStyle}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="home-container"
+      key={language}
     >
-      <motion.div
-        style={contentStyle}
-        initial={{ x: -50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+      {/* ARKA PLAN VİDEOSU */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="background-video"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          transform: 'translateX(-5%)',
+          transformOrigin: 'center center',
+          zIndex: 0
+        }}
       >
-        <div>
-          <h2 style={titleStyle}>
-            {t.home.greeting} <br />
-            {t.home.name}
-          </h2>
-          <h3 style={subtitleStyle}>{t.home.title}</h3>
-          <p style={descriptionStyle}>{t.home.description}</p>
-        </div>
-        
-        <div style={{ width: "100%" }}>
-          <div style={buttonContainerStyle}>
-            <Link to="/about" style={{ flex: 1, textDecoration: "none" }}>
-              <motion.button
-                style={terminalButtonStyle}
-                whileHover={{
-                  scale: 1.02,
-                  border: "1.5px solid rgba(255, 215, 0, 0.5)",
-                  background: "rgba(35, 39, 46, 0.98)",
-                  boxShadow: "0 6px 20px rgba(0, 0, 0, 0.3)"
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {"> "}{t.nav.about}
-              </motion.button>
-            </Link>
-            <Link to="/contact" style={{ flex: 1, textDecoration: "none" }}>
-              <motion.button
-                style={{
-                  ...terminalButtonStyle,
-                  border: "1.5px solid rgba(255, 215, 0, 0.4)",
-                  background: "rgba(35, 39, 46, 0.98)"
-                }}
-                whileHover={{
-                  scale: 1.02,
-                  border: "1.5px solid rgba(255, 215, 0, 0.5)",
-                  background: "rgba(35, 39, 46, 0.98)",
-                  boxShadow: "0 6px 20px rgba(0, 0, 0, 0.3)"
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {"> "}{t.nav.contact}
-              </motion.button>
-            </Link>
+        <source src="/1.mp4" type="video/mp4" />
+      </video>
+
+      {/* İÇERİK BLOĞU */}
+      <div
+        className="home-content-flex"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(calc(-50% - 80px), -50%)',
+          zIndex: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          width: '100%',
+          maxWidth: '900px',
+          padding: '0 1rem',
+          gap: '70px',
+        }}
+      >
+        <motion.h1
+          className="home-main-title-fixed glow-title"
+          style={{
+            fontSize: '4rem',
+            fontWeight: 800,
+            backgroundImage: 'linear-gradient(45deg, #ff9f33 0%, #ffb366 50%, #ffd699 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            filter: 'none',
+            marginBottom: '-10px',
+          }}
+        >
+          Merhaba, ben Gülheda
+        </motion.h1>
+
+        <motion.span
+          style={{
+            fontSize: '2rem',
+            color: '#ffbe88',
+            fontWeight: 600,
+            marginTop: '-10px',
+            marginBottom: '0',
+            marginLeft: '-10px',
+          }}
+        >
+          Bilgisayar Mühendisliği Öğrencisi
+        </motion.span>
+
+        <div
+          style={{
+            marginTop: '340px',
+            width: '100%',
+            maxWidth: '900px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '50px',
+          }}
+        >
+          <motion.div
+            style={{
+              fontSize: '1.4rem',
+              color: '#fff',
+              width: '100%',
+              lineHeight: 1.6,
+            }}
+          >
+            Yapay zekâ, simülasyon ve otonom sistemlere tutkuyla odaklanıyorum.
+            Teknofest'te İHA simülasyonları geliştiriyor, karmaşık problemleri sade
+            ve etkili çözümlere dönüştürüyorum.
+          </motion.div>
+
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <motion.button
+              whileHover={{ scale: 1.08, boxShadow: '0 0 24px 0 #ffb36688' }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => navigate("/portfolio")}
+              style={{
+                border: '2px solid #ffb366',
+                color: '#ffb366',
+                background: 'transparent',
+                fontWeight: 600,
+                fontSize: '1.4rem',
+                borderRadius: '12px',
+                padding: '12px 32px',
+                transition: 'all 0.22s cubic-bezier(.4,0,.2,1)',
+              }}
+            >
+              &gt; Projelerime Göz At
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.08, boxShadow: '0 0 24px 0 #ffb36688' }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => navigate("/about")}
+              style={{
+                border: '2px solid #ffb366',
+                color: '#ffb366',
+                background: 'transparent',
+                fontWeight: 600,
+                fontSize: '1.4rem',
+                borderRadius: '12px',
+                padding: '12px 32px',
+                transition: 'all 0.22s cubic-bezier(.4,0,.2,1)',
+              }}
+            >
+              &gt; Ben Kimim?
+            </motion.button>
           </div>
 
-          <div style={socialLinksStyle}>
-            <motion.a
-              href="https://github.com/gulheda"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={socialLinkStyle}
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaGithub />
-            </motion.a>
-            <motion.a
-              href="https://www.linkedin.com/in/g%C3%BClheda-k%C4%B1z%C4%B1lhan-769b29284/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={socialLinkStyle}
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaLinkedin />
-            </motion.a>
-            <motion.a
-              href="https://twitter.com/gulhedadev"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={socialLinkStyle}
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaTwitter />
-            </motion.a>
-          </div>
+          <div style={{ fontSize: '1.2rem', color: '#fff' }}>[⌘+] ile keşfet</div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
 
 export default Home;
+
+

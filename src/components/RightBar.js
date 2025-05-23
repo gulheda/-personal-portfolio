@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaCode, FaMicrochip, FaSatellite, FaTwitter, FaGithub, FaInstagram } from "react-icons/fa";
+import { FaCode, FaMicrochip, FaTwitter, FaGithub, FaInstagram } from "react-icons/fa";
+import { GiDeliveryDrone } from "react-icons/gi";
 import { motion } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translations';
@@ -30,10 +31,9 @@ const RightBar = () => {
     bottom: "0",
     zIndex: 1002,
     paddingTop: isMobile ? "15px" : "35px",
-    background: "rgba(20, 20, 30, 0.32)",
-    backdropFilter: "blur(14px)",
-    borderLeft: "2px solid rgba(255, 215, 0, 0.13)",
-    boxShadow: "-2px 0 18px 0 rgba(13,27,60,0.13)",
+    background: "transparent",
+    borderLeft: "1px solid rgba(255, 165, 0, 0.05)",
+    boxShadow: "2px 0 18px 0 rgba(13,27,60,0.13)",
     overflowY: "auto",
     overflowX: "hidden",
     scrollbarWidth: "none",
@@ -66,45 +66,36 @@ const RightBar = () => {
   };
 
   const iconBoxStyle = {
-    border: "2px solid #ffd70033",
-    borderRadius: "13px",
-    width: isMobile ? "36px" : "64px",
-    height: isMobile ? "36px" : "64px",
-    marginBottom: isMobile ? "10px" : "32px",
+    width: isMobile ? "48px" : "80px",
+    height: isMobile ? "48px" : "80px",
+    borderRadius: "15px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: isMobile ? "1.2rem" : "2.7rem",
-    color: "#ffd700",
     background: "rgba(20, 20, 30, 0.55)",
-    opacity: 0.88,
+    border: "2px solid #ffd70033",
+    marginBottom: "20px",
     cursor: "pointer",
-    boxShadow: "0 0 18px 0 rgba(255, 215, 0, 0.08)",
     transition: "all 0.22s cubic-bezier(.4,0,.2,1)"
   };
 
-  const iconBoxHover = {
-    boxShadow: "0 0 32px 0 rgba(255, 200, 80, 0.25)",
-    background: "rgba(20, 20, 30, 0.85)",
-    color: "#ffa500",
-    transform: "scale(1.13)"
+  const iconStyle = {
+    fontSize: isMobile ? "1.5rem" : "2.5rem",
+    color: "#ffb366",
+    opacity: 0.88
   };
 
-  const socialStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: isMobile ? "8px" : "22px",
-    marginTop: isMobile ? "10px" : "48px"
-  };
-
-  const socialIconBox = {
+  const socialBoxStyle = {
     ...iconBoxStyle,
     border: "2px solid #fff7b2",
     color: "#fff7b2",
-    fontSize: isMobile ? "1rem" : "2.1rem",
-    marginBottom: 0,
+    marginBottom: "12px",
     marginTop: 0
+  };
+
+  const socialIconStyle = {
+    fontSize: isMobile ? "1.2rem" : "2rem",
+    color: "#ffb366"
   };
 
   return (
@@ -202,77 +193,58 @@ const RightBar = () => {
           }}
         />
       </div>
-      <div>
+
+      <div style={{ marginTop: "20px" }}>
         <motion.div
           style={iconBoxStyle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ scale: 1.13, boxShadow: "0 0 40px 0 #ffd70099, 0 0 0 6px #222a", background: "rgba(20, 20, 30, 0.85)", color: "#ffa500" }}
-          title={t.titles.code}
+          whileHover={{ scale: 1.08, background: "rgba(255, 215, 0, 0.1)" }}
         >
-          <FaCode />
+          <FaCode style={iconStyle} />
         </motion.div>
         <motion.div
           style={iconBoxStyle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          whileHover={{ scale: 1.13, boxShadow: "0 0 40px 0 #ffd70099, 0 0 0 6px #222a", background: "rgba(20, 20, 30, 0.85)", color: "#ffa500" }}
-          title={t.titles.ai}
+          whileHover={{ scale: 1.08, background: "rgba(255, 215, 0, 0.1)" }}
         >
-          <FaMicrochip />
+          <FaMicrochip style={iconStyle} />
         </motion.div>
         <motion.div
           style={iconBoxStyle}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          whileHover={{ scale: 1.13, boxShadow: "0 0 40px 0 #ffd70099, 0 0 0 6px #222a", background: "rgba(20, 20, 30, 0.85)", color: "#ffa500" }}
-          title={t.titles.drone}
+          whileHover={{ scale: 1.08, background: "rgba(255, 215, 0, 0.1)" }}
         >
-          <FaSatellite />
+          <GiDeliveryDrone style={iconStyle} />
         </motion.div>
       </div>
-      <div style={socialStyle}>
+
+      <div style={{ marginTop: "18px" }}>
         <motion.a
           href="https://twitter.com/gulhedadev"
           target="_blank"
           rel="noopener noreferrer"
-          style={socialIconBox}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          style={socialBoxStyle}
           whileHover={{ scale: 1.13, boxShadow: "0 0 40px 0 #ffd70099, 0 0 0 6px #222a", background: "rgba(20, 20, 30, 0.85)", color: "#ffa500" }}
           title="Twitter"
         >
-          <FaTwitter />
+          <FaTwitter style={socialIconStyle} />
         </motion.a>
         <motion.a
           href="https://github.com/gulheda"
           target="_blank"
           rel="noopener noreferrer"
-          style={socialIconBox}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          style={socialBoxStyle}
           whileHover={{ scale: 1.13, boxShadow: "0 0 40px 0 #ffd70099, 0 0 0 6px #222a", background: "rgba(20, 20, 30, 0.85)", color: "#ffa500" }}
           title="GitHub"
         >
-          <FaGithub />
+          <FaGithub style={socialIconStyle} />
         </motion.a>
         <motion.a
           href="https://www.instagram.com/rosehkzlhn/"
           target="_blank"
           rel="noopener noreferrer"
-          style={socialIconBox}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          style={socialBoxStyle}
           whileHover={{ scale: 1.13, boxShadow: "0 0 40px 0 #ffd70099, 0 0 0 6px #222a", background: "rgba(20, 20, 30, 0.85)", color: "#ffa500" }}
           title="Instagram"
         >
-          <FaInstagram />
+          <FaInstagram style={socialIconStyle} />
         </motion.a>
       </div>
     </div>

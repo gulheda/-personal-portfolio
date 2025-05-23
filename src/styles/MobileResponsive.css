@@ -1,0 +1,147 @@
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  /* Container styles */
+  .container, 
+  [style*="maxWidth"],
+  [style*="width: 100%"] {
+    padding: 12px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Title styles */
+  h1, 
+  [style*="fontSize: 3rem"],
+  [style*="fontSize: 2.5rem"] {
+    font-size: 2rem !important;
+    margin-bottom: 30px !important;
+    padding: 0 10px !important;
+  }
+
+  /* Grid and card layouts */
+  [style*="gridTemplateColumns"],
+  [style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 4px !important;
+    max-width: 100% !important;
+  }
+
+  /* Card styles */
+  [style*="padding: 35px"],
+  [style*="padding: 30px"] {
+    padding: 14px !important;
+    border-radius: 10px !important;
+    max-width: 98vw !important;
+  }
+
+  /* Text styles */
+  p, 
+  [style*="fontSize: 1.1rem"] {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Icon sizes */
+  [style*="width: 80px"],
+  [style*="height: 80px"] {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  /* Form elements */
+  input, 
+  textarea, 
+  button {
+    font-size: 1rem !important;
+    padding: 12px !important;
+  }
+
+  /* Spacing adjustments */
+  [style*="gap: 30px"] {
+    gap: 15px !important;
+  }
+
+  [style*="marginBottom: 50px"] {
+    margin-bottom: 30px !important;
+  }
+
+  /* Sidebar adjustments */
+  .sidebar {
+    width: 60px !important;
+  }
+
+  /* Right bar adjustments */
+  .right-bar {
+    width: 60px !important;
+  }
+
+  /* Content margins */
+  [style*="margin: 0 0 0 96px"] {
+    margin: 0 0 0 60px !important;
+  }
+
+  .neler-title {
+    font-size: 1.4rem !important;
+    margin-bottom: 18px !important;
+    padding: 0 4px !important;
+  }
+
+  .neler-card-title {
+    font-size: 1.1rem !important;
+  }
+
+  .neler-card-desc {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  h1, 
+  [style*="fontSize: 2rem"] {
+    font-size: 1.8rem !important;
+  }
+
+  .container, 
+  [style*="padding: 20px"] {
+    padding: 6px !important;
+  }
+
+  [style*="padding: 20px"] {
+    padding: 15px !important;
+  }
+
+  /* Icon sizes for small devices */
+  [style*="width: 60px"],
+  [style*="height: 60px"] {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  /* Form elements for small devices */
+  input, 
+  textarea, 
+  button {
+    font-size: 0.9rem !important;
+    padding: 10px !important;
+  }
+
+  .neler-card {
+    padding: 8px !important;
+    border-radius: 7px !important;
+  }
+
+  .neler-title {
+    font-size: 1.1rem !important;
+  }
+
+  .neler-card-title {
+    font-size: 0.95rem !important;
+  }
+
+  .neler-card-desc {
+    font-size: 0.85rem !important;
+  }
+} 

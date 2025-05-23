@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter, FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translations';
+import "./ContactMobile.css";
 
 const Contact = () => {
   const { language } = useLanguage();
@@ -17,6 +18,13 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 600);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,21 +111,29 @@ const Contact = () => {
   const contentBoxStyle = {
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "stretch",
     flexWrap: "wrap",
-    gap: "48px",
+    gap: isMobile ? "16px" : "32px",
     width: "100%",
-    maxWidth: "900px"
+    maxWidth: "1000px",
+    minHeight: "420px",
+    flexDirection: isMobile ? "column" : "row"
   };
 
+  const kutuGenislik = isMobile ? "100%" : "340px";
+  const kutuPadding = isMobile ? "10px" : "16px";
+
   const contactInfoStyle = {
-    background: "rgba(10, 10, 10, 0.35)",
-    backdropFilter: "blur(15px)",
-    borderRadius: "20px",
-    padding: "40px 32px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    width: "48%",
-    minWidth: "320px"
+    background: "rgba(10, 10, 10, 0.32)",
+    backdropFilter: "blur(12px)",
+    borderRadius: "18px",
+    padding: kutuPadding,
+    border: "1px solid rgba(255, 255, 255, 0.09)",
+    width: kutuGenislik,
+    minWidth: kutuGenislik,
+    maxWidth: kutuGenislik,
+    height: "100%",
+    flex: "none"
   };
 
   const infoItemStyle = {
@@ -149,17 +165,13 @@ const Contact = () => {
   };
 
   const formStyle = {
-    background: "rgba(10, 10, 10, 0.35)",
-    backdropFilter: "blur(15px)",
-    borderRadius: "20px",
-    padding: "40px 32px",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    width: "48%",
-    minWidth: "320px"
+    ...contactInfoStyle,
+    boxSizing: "border-box",
+    overflow: "hidden"
   };
 
   const inputGroupStyle = {
-    marginBottom: "20px"
+    marginBottom: "12px"
   };
 
   const labelStyle = {
@@ -169,19 +181,21 @@ const Contact = () => {
   };
 
   const inputStyle = {
-    width: "100%",
-    padding: "12px",
+    width: "calc(100% - 2px)",
+    padding: "6px 8px",
     background: "rgba(255, 255, 255, 0.1)",
     border: "1px solid rgba(255, 255, 255, 0.2)",
     borderRadius: "8px",
     color: "#fff",
-    fontSize: "1rem",
-    transition: "all 0.3s ease"
+    fontSize: "0.97rem",
+    transition: "all 0.3s ease",
+    boxSizing: "border-box",
+    marginBottom: "10px"
   };
 
   const textareaStyle = {
     ...inputStyle,
-    minHeight: "150px",
+    minHeight: "90px",
     resize: "vertical"
   };
 
@@ -194,16 +208,17 @@ const Contact = () => {
   const buttonStyle = {
     background: "#ffa500",
     color: "#fff",
-    padding: "12px 30px",
+    padding: isMobile ? "8px 10px" : "12px 30px",
     border: "none",
     borderRadius: "25px",
-    fontSize: "1rem",
+    fontSize: isMobile ? "0.95rem" : "1rem",
     cursor: "pointer",
     transition: "all 0.3s ease",
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    marginTop: "20px"
+    marginTop: "20px",
+    width: isMobile ? "100%" : undefined
   };
 
   const successMessageStyle = {
