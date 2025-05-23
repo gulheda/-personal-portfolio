@@ -45,7 +45,40 @@ export const translations = {
       communication: 'İletişim',
       timeManagement: 'Zaman Yönetimi',
       research: 'Araştırma & Analiz',
-      adaptability: 'Uyum Sağlama'
+      adaptability: 'Uyum Sağlama',
+      categories: [
+        {
+          title: 'Programlama Dilleri',
+          skills: [
+            { name: 'Python', level: 85, icon: 'FaPython' },
+            { name: 'C#', level: 75, icon: 'FaCode' }
+          ]
+        },
+        {
+          title: 'Backend Teknolojileri',
+          skills: [
+            { name: 'Node.js', level: 80, icon: 'FaServer' },
+            { name: 'Express', level: 75, icon: 'FaServer' },
+            { name: 'Django', level: 70, icon: 'FaServer' }
+          ]
+        },
+        {
+          title: 'Yapay Zeka & ML',
+          skills: [
+            { name: 'TensorFlow', level: 80, icon: 'FaBrain' },
+            { name: 'PyTorch', level: 75, icon: 'FaBrain' },
+            { name: 'Scikit-learn', level: 80, icon: 'FaBrain' }
+          ]
+        },
+        {
+          title: 'Diğer Teknolojiler',
+          skills: [
+            { name: 'Git', level: 85, icon: 'FaCode' },
+            { name: 'Docker', level: 70, icon: 'FaCode' },
+            { name: 'ROS', level: 75, icon: 'SiRos' }
+          ]
+        }
+      ]
     },
     whatICan: {
       title: 'Neler Yapabilirim?',
@@ -138,7 +171,40 @@ export const translations = {
       communication: 'Communication',
       timeManagement: 'Time Management',
       research: 'Research & Analysis',
-      adaptability: 'Adaptability'
+      adaptability: 'Adaptability',
+      categories: [
+        {
+          title: 'Programming Languages',
+          skills: [
+            { name: 'Python', level: 85, icon: 'FaPython' },
+            { name: 'C#', level: 75, icon: 'FaCode' }
+          ]
+        },
+        {
+          title: 'Backend Technologies',
+          skills: [
+            { name: 'Node.js', level: 80, icon: 'FaServer' },
+            { name: 'Express', level: 75, icon: 'FaServer' },
+            { name: 'Django', level: 70, icon: 'FaServer' }
+          ]
+        },
+        {
+          title: 'AI & Machine Learning',
+          skills: [
+            { name: 'TensorFlow', level: 80, icon: 'FaBrain' },
+            { name: 'PyTorch', level: 75, icon: 'FaBrain' },
+            { name: 'Scikit-learn', level: 80, icon: 'FaBrain' }
+          ]
+        },
+        {
+          title: 'Other Technologies',
+          skills: [
+            { name: 'Git', level: 85, icon: 'FaCode' },
+            { name: 'Docker', level: 70, icon: 'FaCode' },
+            { name: 'ROS', level: 75, icon: 'SiRos' }
+          ]
+        }
+      ]
     },
     whatICan: {
       title: 'What Can I Do?',
@@ -231,7 +297,40 @@ export const translations = {
       communication: 'コミュニケーション',
       timeManagement: '時間管理',
       research: '研究＆分析',
-      adaptability: '適応力'
+      adaptability: '適応力',
+      categories: [
+        {
+          title: 'プログラミング言語',
+          skills: [
+            { name: 'Python', level: 85, icon: 'FaPython' },
+            { name: 'C#', level: 75, icon: 'FaCode' }
+          ]
+        },
+        {
+          title: 'バックエンド技術',
+          skills: [
+            { name: 'Node.js', level: 80, icon: 'FaServer' },
+            { name: 'Express', level: 75, icon: 'FaServer' },
+            { name: 'Django', level: 70, icon: 'FaServer' }
+          ]
+        },
+        {
+          title: 'AI＆機械学習',
+          skills: [
+            { name: 'TensorFlow', level: 80, icon: 'FaBrain' },
+            { name: 'PyTorch', level: 75, icon: 'FaBrain' },
+            { name: 'Scikit-learn', level: 80, icon: 'FaBrain' }
+          ]
+        },
+        {
+          title: 'その他の技術',
+          skills: [
+            { name: 'Git', level: 85, icon: 'FaCode' },
+            { name: 'Docker', level: 70, icon: 'FaCode' },
+            { name: 'ROS', level: 75, icon: 'SiRos' }
+          ]
+        }
+      ]
     },
     whatICan: {
       title: '提供できること',
@@ -278,4 +377,4 @@ export const translations = {
       uiuxDesc: 'ユーザーに直感的で意味のある体験を提供することは、私にとってソフトウェアの最も人間的な側面です。'
     }
   }
-}; 
+};

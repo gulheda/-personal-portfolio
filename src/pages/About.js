@@ -1,12 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaUser, FaEnvelope, FaBirthdayCake, FaMapMarkerAlt } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaBirthdayCake, FaMapMarkerAlt, FaGraduationCap, FaLightbulb } from "react-icons/fa";
 import { useLanguage } from '../context/LanguageContext';
-import { translations } from '../translations';
+import MobileNavBar from '../components/MobileNavBar';
+import { useMediaQuery } from 'react-responsive';
 
 const About = () => {
-  const { language } = useLanguage();
-  const t = translations[language];
+  const { t, language } = useLanguage();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  // Helper function to safely get translation objects
+  const getTranslationItems = (key) => {
+    try {
+      const items = t(key, { returnObjects: true });
+      return Array.isArray(items) ? items : [];
+    } catch (error) {
+      console.error(`Error getting translation for ${key}:`, error);
+      return [];
+    }
+  };
 
   const containerStyle = {
     maxWidth: "800px",
@@ -87,27 +99,102 @@ const About = () => {
     textAlign: "center"
   };
 
-  const pageStyle = {
-    width: "100%",
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    position: "relative",
-    zIndex: 10,
-    background: "rgba(10, 10, 10, 0.25)",
-    backdropFilter: "blur(10px)"
-  };
+  if (isMobile) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        width: '100vw',
+        background: '#181f2a',
+        padding: '18px 0 64px 0',
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        <div style={{
+          width: '100%',
+          padding: '0 10px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          alignItems: 'center',
+        }}>
+          <div style={{
+            background: '#23232b',
+            borderRadius: 10,
+            padding: '18px 12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            width: '100%',
+            maxWidth: 800,
+          }}>
+            <h1 style={{
+              color: '#ffa500',
+              fontSize: '2.5rem',
+              marginBottom: '30px',
+              fontFamily: 'Montserrat, Arial, sans-serif',
+              textAlign: 'center',
+              fontWeight: 'bold',
+            }}>
+              {t('about.title')}
+            </h1>
+            <div style={{
+              fontSize: '1.1rem',
+              lineHeight: 1.6,
+              color: 'rgba(255, 255, 255, 0.9)',
+              marginBottom: '20px',
+              textAlign: 'center',
+            }}>
+              {t('about.description')}
+            </div>
+          </div>
+          <div style={{ background: '#23232b', borderRadius: 10, padding: '10px 8px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <h2 style={{ color: '#ffa500', fontSize: 15, marginBottom: 8, fontWeight: 700 }}>{t('about.personalInfo.title')}</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {getTranslationItems('about.personalInfo.items').map((item, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {item.icon}
+                  <span style={{ color: '#fff', fontSize: 12 }}>{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ background: '#23232b', borderRadius: 10, padding: '10px 8px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <h2 style={{ color: '#ffa500', fontSize: 15, marginBottom: 8, fontWeight: 700 }}>{t('about.education.title')}</h2>
+            <div style={{ color: '#fff', fontSize: 12, lineHeight: 1.4 }}>{t('about.education.description')}</div>
+          </div>
+          <div style={{ background: '#23232b', borderRadius: 10, padding: '10px 8px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <h2 style={{ color: '#ffa500', fontSize: 15, marginBottom: 8, fontWeight: 700 }}>{t('about.approach.title')}</h2>
+            <div style={{ color: '#fff', fontSize: 12, lineHeight: 1.4 }}>{t('about.approach.description')}</div>
+          </div>
+          <div style={{ background: '#23232b', borderRadius: 10, padding: '10px 8px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <h2 style={{ color: '#ffa500', fontSize: 15, marginBottom: 8, fontWeight: 700 }}>{t('about.interests.title')}</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {getTranslationItems('about.interests.items').map((interest, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {interest.icon}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <span style={{ color: '#ffa500', fontSize: 12, fontWeight: 600 }}>{interest.title}</span>
+                    <span style={{ color: '#fff', fontSize: 10, opacity: 0.8 }}>{interest.description}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <MobileNavBar />
+      </div>
+    );
+  }
 
+  // PC versiyonu aynen korundu
   return (
     <div style={containerStyle}>
-      <h1 style={titleStyle}>{t.about.title}</h1>
-      
+      <h1 style={titleStyle}>{t('about.title')}</h1>
+
       <div style={sectionStyle}>
         <h2 style={sectionTitleStyle}>
           <span style={bulletStyle}>✦</span>
-          {t.about.intro}
+          {t('about.intro')}
         </h2>
         <div style={{
           display: "flex",
@@ -122,39 +209,39 @@ const About = () => {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaUser style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.contact.name}:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t('contact.name')}:</span>
             <span style={{ color: "#fff" }}>Gülheda Kızılhan</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaEnvelope style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.contact.email}:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t('contact.email')}:</span>
             <span style={{ color: "#fff" }}>kizilhangulheda@gmail.com</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaBirthdayCake style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.about.age}:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t('about.age')}:</span>
             <span style={{ color: "#fff" }}>21</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <FaMapMarkerAlt style={{ color: "#ffa500", fontSize: "1.2em" }} />
-            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t.about.location}:</span>
+            <span style={{ color: "#ffa500", fontWeight: 600, minWidth: 70 }}>{t('about.location')}:</span>
             <span style={{ color: "#fff" }}>Denizli</span>
           </div>
         </div>
         <p style={textStyle}>
-          {t.about.description}
+          {t('about.description')}
         </p>
       </div>
 
       <div style={sectionStyle}>
         <h2 style={sectionTitleStyle}>
           <span style={bulletStyle}>✦</span>
-          {t.about.education}
+          {t('about.education')}
         </h2>
         <ul style={listStyle}>
           <li style={listItemStyle}>
             <span style={bulletStyle}>•</span>
-            {t.home.title}, Balıkesir University
+            {t('home.title')}, Balıkesir University
           </li>
         </ul>
       </div>
@@ -191,10 +278,10 @@ const About = () => {
       </div>
 
       <motion.h2 style={subtitleStyle}>
-        {t.home.title}
+        {t('home.title')}
       </motion.h2>
       <p style={descriptionStyle}>
-        {t.home.description}
+        {t('home.description')}
       </p>
     </div>
   );

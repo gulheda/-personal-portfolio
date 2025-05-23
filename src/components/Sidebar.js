@@ -38,25 +38,7 @@ const Sidebar = () => {
     opacity: 0.88,
     cursor: "pointer",
     boxShadow: "0 0 18px 0 rgba(255, 215, 0, 0.08)",
-    transition: "all 0.22s cubic-bezier(.4,0,.2,1)",
-    "@media (max-width: 768px)": {
-      width: "60px",
-      height: "60px",
-      fontSize: "2.8rem"
-    },
-    "&:hover": {
-      transform: "scale(1.1)",
-      boxShadow: "0 0 48px 16px #ffb36688, 0 0 0 8px #ffb36633",
-      border: "2.5px solid #ffb366",
-      animation: "glowAnim 1.2s infinite alternate"
-    },
-    "&:active": {
-      transform: "scale(0.95)",
-      background: "rgba(255, 179, 102, 0.2)",
-      boxShadow: "0 0 64px 24px #ffb366cc, 0 0 0 12px #ffb36644",
-      border: "2.5px solid #ffb366",
-      animation: "clickGlow 0.5s ease-out"
-    }
+    transition: "all 0.22s cubic-bezier(.4,0,.2,1)"
   };
 
   const activeBoxStyle = {
@@ -87,10 +69,7 @@ const Sidebar = () => {
     zIndex: 1000,
     overflowY: "auto",
     overflowX: "hidden",
-    transition: "width 0.3s cubic-bezier(.4,0,.2,1)",
-    "@media (max-width: 768px)": {
-      display: "none"
-    }
+    transition: "width 0.3s cubic-bezier(.4,0,.2,1)"
   };
 
   const logoStyle = {
@@ -107,31 +86,7 @@ const Sidebar = () => {
     borderRadius: "16px",
     border: "2px solid #ffb36633",
     background: "rgba(255, 179, 102, 0.1)",
-    position: "relative",
-    "&:hover": {
-      transform: "scale(1.1)",
-      textShadow: "0 0 24px #ffd70088, 0 2px 12px #fff3",
-      border: "2.5px solid #ffb366",
-      background: "rgba(255, 179, 102, 0.15)",
-      boxShadow: "0 0 20px rgba(255, 179, 102, 0.3)",
-      animation: "glowAnim 1.2s infinite alternate"
-    },
-    "&::after": {
-      content: '"Menüyü Aç"',
-      position: "absolute",
-      bottom: "-30px",
-      left: "50%",
-      transform: "translateX(-50%)",
-      fontSize: "0.9rem",
-      color: "#ffb366",
-      opacity: 0,
-      transition: "opacity 0.3s ease",
-      whiteSpace: "nowrap",
-      textShadow: "none"
-    },
-    "&:hover::after": {
-      opacity: 1
-    }
+    position: "relative"
   };
 
   const navStyle = {
@@ -139,11 +94,7 @@ const Sidebar = () => {
     flexDirection: "column",
     gap: "40px",
     width: "100%",
-    padding: "0 25px",
-    "@media (max-width: 768px)": {
-      gap: "30px",
-      padding: "0 15px"
-    }
+    padding: "0 25px"
   };
 
   const navItemStyle = {
@@ -154,11 +105,7 @@ const Sidebar = () => {
     color: "#ffb366",
     transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
     padding: "8px 12px",
-    borderRadius: "16px",
-    "&:hover": {
-      background: "rgba(255, 179, 102, 0.1)",
-      transform: "translateX(5px)"
-    }
+    borderRadius: "16px"
   };
 
   const navTextStyle = {
@@ -167,10 +114,7 @@ const Sidebar = () => {
     opacity: isExpanded ? 1 : 0,
     transition: "opacity 0.3s cubic-bezier(.4,0,.2,1)",
     whiteSpace: "nowrap",
-    overflow: "hidden",
-    "@media (max-width: 768px)": {
-      fontSize: "1.1rem"
-    }
+    overflow: "hidden"
   };
 
   const menuItems = [
@@ -183,86 +127,93 @@ const Sidebar = () => {
   ];
 
   return (
-    <motion.div style={sidebarStyle}>
-      <motion.div
-        style={logoStyle}
-        onClick={() => setIsExpanded(!isExpanded)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        title="Menüyü Aç/Kapat"
-      >
-        G
-      </motion.div>
+    <>
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .sidebar {
+              display: none !important;
+            }
+          }
+          @keyframes glowAnim {
+            0% { 
+              box-shadow: 0 0 48px 16px #ffb36688, 0 0 0 8px #ffb36633;
+              text-shadow: 0 0 24px #ffd70055, 0 2px 8px #fff2;
+            }
+            100% { 
+              box-shadow: 0 0 64px 24px #ffb366cc, 0 0 0 12px #ffb36644;
+              text-shadow: 0 0 32px #ffd70088, 0 2px 12px #fff3;
+            }
+          }
+          @keyframes clickGlow {
+            0% {
+              box-shadow: 0 0 0 0 #ffb36644;
+              background: rgba(255, 179, 102, 0.1);
+            }
+            50% {
+              box-shadow: 0 0 64px 24px #ffb366cc;
+              background: rgba(255, 179, 102, 0.3);
+            }
+            100% {
+              box-shadow: 0 0 48px 16px #ffb36688;
+              background: rgba(255, 179, 102, 0.2);
+            }
+          }
+        `}
+      </style>
+      <motion.div style={sidebarStyle} className="sidebar">
+        <motion.div
+          style={logoStyle}
+          onClick={() => setIsExpanded(!isExpanded)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          title="Menüyü Aç/Kapat"
+        >
+          G
+        </motion.div>
 
-      <style>{`
-        @keyframes glowAnim {
-          0% { 
-            box-shadow: 0 0 48px 16px #ffb36688, 0 0 0 8px #ffb36633;
-            text-shadow: 0 0 24px #ffd70055, 0 2px 8px #fff2;
-          }
-          100% { 
-            box-shadow: 0 0 64px 24px #ffb366cc, 0 0 0 12px #ffb36644;
-            text-shadow: 0 0 32px #ffd70088, 0 2px 12px #fff3;
-          }
-        }
-
-        @keyframes clickGlow {
-          0% {
-            box-shadow: 0 0 0 0 #ffb36644;
-            background: rgba(255, 179, 102, 0.1);
-          }
-          50% {
-            box-shadow: 0 0 64px 24px #ffb366cc;
-            background: rgba(255, 179, 102, 0.3);
-          }
-          100% {
-            box-shadow: 0 0 48px 16px #ffb36688;
-            background: rgba(255, 179, 102, 0.2);
-          }
-        }
-      `}</style>
-
-      <nav style={navStyle}>
-        {menuItems.map((item, index) => (
-          <NavLink
-            key={index}
-            to={item.path}
-            style={({ isActive }) => ({
-              ...navItemStyle,
-              color: isActive ? "#ffb366" : "#fff"
-            })}
-          >
-            <motion.div 
+        <nav style={navStyle}>
+          {menuItems.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.path}
               style={({ isActive }) => ({
-                ...iconBoxStyle,
-                ...(isActive ? activeBoxStyle : {})
+                ...navItemStyle,
+                color: isActive ? "#ffb366" : "#fff"
               })}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ 
-                scale: 0.95,
-                boxShadow: "0 0 64px 24px #ffb366cc",
-                background: "rgba(255, 179, 102, 0.3)"
-              }}
             >
-              {item.icon}
-            </motion.div>
-            <AnimatePresence>
-              {isExpanded && (
-                <motion.span
-                  style={navTextStyle}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {item.text}
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </NavLink>
-        ))}
-      </nav>
-    </motion.div>
+              <motion.div 
+                style={({ isActive }) => ({
+                  ...iconBoxStyle,
+                  ...(isActive ? activeBoxStyle : {})
+                })}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ 
+                  scale: 0.95,
+                  boxShadow: "0 0 64px 24px #ffb366cc",
+                  background: "rgba(255, 179, 102, 0.3)"
+                }}
+              >
+                {item.icon}
+              </motion.div>
+              <AnimatePresence>
+                {isExpanded && (
+                  <motion.span
+                    style={navTextStyle}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {item.text}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </NavLink>
+          ))}
+        </nav>
+      </motion.div>
+    </>
   );
 };
 

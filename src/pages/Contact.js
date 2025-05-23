@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter, FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
-import { translations } from '../translations';
-import "./ContactMobile.css";
+import MobileNavBar from '../components/MobileNavBar';
+import { useMediaQuery } from 'react-responsive';
 
 const Contact = () => {
-  const { language } = useLanguage();
-  const t = translations[language];
+  const { t } = useLanguage();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,13 +18,6 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 600);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +25,6 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
-    // Hata mesajını temizle
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -44,18 +36,18 @@ const Contact = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.name.trim()) {
-      newErrors.name = "İsim alanı zorunludur";
+      newErrors.name = t('contact.errors.nameRequired');
     }
     if (!formData.email.trim()) {
-      newErrors.email = "E-posta alanı zorunludur";
+      newErrors.email = t('contact.errors.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Geçerli bir e-posta adresi giriniz";
+      newErrors.email = t('contact.errors.invalidEmail');
     }
     if (!formData.subject.trim()) {
-      newErrors.subject = "Konu alanı zorunludur";
+      newErrors.subject = t('contact.errors.subjectRequired');
     }
     if (!formData.message.trim()) {
-      newErrors.message = "Mesaj alanı zorunludur";
+      newErrors.message = t('contact.errors.messageRequired');
     }
     return newErrors;
   };
@@ -70,8 +62,6 @@ const Contact = () => {
     }
 
     setIsSubmitting(true);
-    // Burada form gönderme işlemi yapılacak
-    // Örnek olarak setTimeout kullanıyoruz
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
@@ -81,286 +71,491 @@ const Contact = () => {
         subject: "",
         message: ""
       });
-      // 3 saniye sonra başarı mesajını kaldır
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 3000);
     }, 1500);
   };
 
-  const containerStyle = {
-    maxWidth: "1200px",
-    margin: "0 auto",
-    padding: "40px 20px",
-    color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  };
+  if (isMobile) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        width: '100vw',
+        background: '#181f2a',
+        padding: '18px 0 64px 0',
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        <div style={{
+          width: '100%',
+          padding: '0 10px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          alignItems: 'center',
+        }}>
+          <div style={{
+            background: '#23232b',
+            borderRadius: 10,
+            padding: '18px 12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            width: '100%',
+            maxWidth: 800,
+          }}>
+            <h1 style={{
+              color: '#ffa500',
+              fontSize: 22,
+              marginBottom: 12,
+              textAlign: 'center',
+              fontWeight: 700
+            }}>
+              {t('contact.title')}
+            </h1>
+          </div>
 
-  const titleStyle = {
-    color: "#ffa500",
-    fontSize: "2.5rem",
-    fontWeight: "bold",
-    marginBottom: "40px",
-    fontFamily: 'Montserrat, Arial, sans-serif',
-    textAlign: "center"
-  };
+          <form onSubmit={handleSubmit} style={{
+            background: '#23232b',
+            borderRadius: 12,
+            padding: '16px 12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            width: '100%',
+            margin: 0,
+          }}>
+            <div style={{ marginBottom: '12px' }}>
+              <label style={{
+                display: 'block',
+                color: '#fff',
+                fontSize: 14,
+                marginBottom: 6
+              }}>
+                {t('contact.name')}
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  background: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 8,
+                  color: '#fff',
+                  fontSize: 14
+                }}
+              />
+              {errors.name && (
+                <span style={{ color: '#ff6b6b', fontSize: 12, marginTop: 4 }}>
+                  {errors.name}
+                </span>
+              )}
+            </div>
 
-  const contentBoxStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "stretch",
-    flexWrap: "wrap",
-    gap: isMobile ? "16px" : "32px",
-    width: "100%",
-    maxWidth: "1000px",
-    minHeight: "420px",
-    flexDirection: isMobile ? "column" : "row"
-  };
+            <div style={{ marginBottom: '12px' }}>
+              <label style={{
+                display: 'block',
+                color: '#fff',
+                fontSize: 14,
+                marginBottom: 6
+              }}>
+                {t('contact.email')}
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  background: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 8,
+                  color: '#fff',
+                  fontSize: 14
+                }}
+              />
+              {errors.email && (
+                <span style={{ color: '#ff6b6b', fontSize: 12, marginTop: 4 }}>
+                  {errors.email}
+                </span>
+              )}
+            </div>
 
-  const kutuGenislik = isMobile ? "100%" : "340px";
-  const kutuPadding = isMobile ? "10px" : "16px";
+            <div style={{ marginBottom: '12px' }}>
+              <label style={{
+                display: 'block',
+                color: '#fff',
+                fontSize: 14,
+                marginBottom: 6
+              }}>
+                {t('contact.subject')}
+              </label>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  background: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 8,
+                  color: '#fff',
+                  fontSize: 14
+                }}
+              />
+              {errors.subject && (
+                <span style={{ color: '#ff6b6b', fontSize: 12, marginTop: 4 }}>
+                  {errors.subject}
+                </span>
+              )}
+            </div>
 
-  const contactInfoStyle = {
-    background: "rgba(10, 10, 10, 0.32)",
-    backdropFilter: "blur(12px)",
-    borderRadius: "18px",
-    padding: kutuPadding,
-    border: "1px solid rgba(255, 255, 255, 0.09)",
-    width: kutuGenislik,
-    minWidth: kutuGenislik,
-    maxWidth: kutuGenislik,
-    height: "100%",
-    flex: "none"
-  };
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{
+                display: 'block',
+                color: '#fff',
+                fontSize: 14,
+                marginBottom: 6
+              }}>
+                {t('contact.message')}
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  background: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 8,
+                  color: '#fff',
+                  fontSize: 14,
+                  minHeight: 100,
+                  resize: 'vertical'
+                }}
+              />
+              {errors.message && (
+                <span style={{ color: '#ff6b6b', fontSize: 12, marginTop: 4 }}>
+                  {errors.message}
+                </span>
+              )}
+            </div>
 
-  const infoItemStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
-    marginBottom: "25px",
-    color: "rgba(255, 255, 255, 0.9)"
-  };
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              style={{
+                width: '100%',
+                padding: '12px',
+                background: '#ffa500',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                fontSize: 14,
+                fontWeight: 600,
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                opacity: isSubmitting ? 0.7 : 1
+              }}
+            >
+              {isSubmitting ? t('contact.sending') : t('contact.send')}
+            </button>
 
-  const iconStyle = {
-    fontSize: "1.5rem",
-    color: "#ffa500"
-  };
-
-  const socialLinksStyle = {
-    display: "flex",
-    gap: "20px",
-    marginTop: "30px"
-  };
-
-  const socialLinkStyle = {
-    color: "#ffa500",
-    fontSize: "1.5rem",
-    transition: "transform 0.3s ease",
-    ":hover": {
-      transform: "translateY(-3px)"
-    }
-  };
-
-  const formStyle = {
-    ...contactInfoStyle,
-    boxSizing: "border-box",
-    overflow: "hidden"
-  };
-
-  const inputGroupStyle = {
-    marginBottom: "12px"
-  };
-
-  const labelStyle = {
-    display: "block",
-    marginBottom: "8px",
-    color: "rgba(255, 255, 255, 0.9)"
-  };
-
-  const inputStyle = {
-    width: "calc(100% - 2px)",
-    padding: "6px 8px",
-    background: "rgba(255, 255, 255, 0.1)",
-    border: "1px solid rgba(255, 255, 255, 0.2)",
-    borderRadius: "8px",
-    color: "#fff",
-    fontSize: "0.97rem",
-    transition: "all 0.3s ease",
-    boxSizing: "border-box",
-    marginBottom: "10px"
-  };
-
-  const textareaStyle = {
-    ...inputStyle,
-    minHeight: "90px",
-    resize: "vertical"
-  };
-
-  const errorStyle = {
-    color: "#ff6b6b",
-    fontSize: "0.9rem",
-    marginTop: "5px"
-  };
-
-  const buttonStyle = {
-    background: "#ffa500",
-    color: "#fff",
-    padding: isMobile ? "8px 10px" : "12px 30px",
-    border: "none",
-    borderRadius: "25px",
-    fontSize: isMobile ? "0.95rem" : "1rem",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    marginTop: "20px",
-    width: isMobile ? "100%" : undefined
-  };
-
-  const successMessageStyle = {
-    background: "rgba(46, 213, 115, 0.2)",
-    color: "#2ed573",
-    padding: "15px",
-    borderRadius: "8px",
-    marginTop: "20px",
-    textAlign: "center"
-  };
-
-  const pageStyle = {
-    width: "100%",
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
-    position: "relative",
-    zIndex: 10,
-    background: "rgba(10, 10, 10, 0.25)",
-    backdropFilter: "blur(10px)"
-  };
+            {submitSuccess && (
+              <div style={{
+                marginTop: '12px',
+                padding: '8px',
+                background: 'rgba(46, 213, 115, 0.2)',
+                color: '#2ed573',
+                borderRadius: 8,
+                fontSize: 14,
+                textAlign: 'center'
+              }}>
+                {t('contact.success')}
+              </div>
+            )}
+          </form>
+        </div>
+        <MobileNavBar />
+      </div>
+    );
+  }
 
   return (
-    <div style={containerStyle}>
-      <h1 style={titleStyle}>{t.contact.title}</h1>
-      <div style={contentBoxStyle}>
-        <div style={contactInfoStyle}>
-          <div style={infoItemStyle}>
-            <FaEnvelope style={iconStyle} />
-            <div>
-              <h3 style={{ margin: "0 0 5px 0", color: "#ffa500" }}>{t.contact.email}</h3>
-              <p style={{ margin: 0 }}>kizilhangulheda@gmail.com</p>
+    <div style={{
+      maxWidth: "1200px",
+      margin: "0 auto",
+      padding: "40px 20px",
+      color: "#fff"
+    }}>
+      <motion.h1 
+        style={{
+          fontSize: "2.7rem",
+          fontWeight: "bold",
+          marginBottom: "40px",
+          fontFamily: 'Montserrat, Arial, sans-serif',
+          textAlign: "center",
+          color: "#ffa500",
+          textShadow: "0 2px 8px rgba(255, 165, 0, 0.3)"
+        }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        {t('contact.title')}
+      </motion.h1>
+
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "stretch",
+        flexWrap: "wrap",
+        gap: "32px",
+        width: "100%",
+        maxWidth: "1000px",
+        margin: "0 auto"
+      }}>
+        <div style={{
+          background: "rgba(10, 10, 10, 0.35)",
+          backdropFilter: "blur(15px)",
+          borderRadius: "22px",
+          padding: "30px",
+          border: "1.5px solid rgba(255, 255, 255, 0.10)",
+          boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+          flex: "1",
+          minWidth: "300px"
+        }}>
+          <h2 style={{
+            color: "#ffa500",
+            fontSize: "1.5rem",
+            marginBottom: "25px",
+            fontFamily: 'Montserrat, Arial, sans-serif'
+          }}>
+            {t('contact.contactInfo')}
+          </h2>
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px"
+          }}>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px"
+            }}>
+              <FaEnvelope style={{ color: "#ffa500", fontSize: "1.5rem" }} />
+              <span>gulheda@example.com</span>
+            </div>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px"
+            }}>
+              <FaPhone style={{ color: "#ffa500", fontSize: "1.5rem" }} />
+              <span>+90 555 123 4567</span>
+            </div>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px"
+            }}>
+              <FaMapMarkerAlt style={{ color: "#ffa500", fontSize: "1.5rem" }} />
+              <span>İstanbul, Türkiye</span>
             </div>
           </div>
-          <div style={infoItemStyle}>
-            <FaPhone style={iconStyle} />
-            <div>
-              <h3 style={{ margin: "0 0 5px 0", color: "#ffa500" }}>{t.contact.phone}</h3>
-              <p style={{ margin: 0 }}>0537 957 39 47</p>
-            </div>
-          </div>
-          <div style={infoItemStyle}>
-            <FaMapMarkerAlt style={iconStyle} />
-            <div>
-              <h3 style={{ margin: "0 0 5px 0", color: "#ffa500" }}>{t.contact.location}</h3>
-              <p style={{ margin: 0 }}>Denizli,Türkiye</p>
-            </div>
-          </div>
-          <div style={socialLinksStyle}>
-            <a href="https://www.linkedin.com/in/g%C3%BClheda-k%C4%B1z%C4%B1lhan-769b29284/" target="_blank" rel="noopener noreferrer" style={socialLinkStyle}>
+          <div style={{
+            marginTop: "30px",
+            display: "flex",
+            gap: "20px"
+          }}>
+            <a href="#" style={{ color: "#ffa500", fontSize: "1.5rem" }}>
               <FaLinkedin />
             </a>
-            <a href="https://github.com/gulheda" target="_blank" rel="noopener noreferrer" style={socialLinkStyle}>
+            <a href="#" style={{ color: "#ffa500", fontSize: "1.5rem" }}>
               <FaGithub />
             </a>
-            <a href="https://twitter.com/gulhedadev" target="_blank" rel="noopener noreferrer" style={socialLinkStyle}>
+            <a href="#" style={{ color: "#ffa500", fontSize: "1.5rem" }}>
               <FaTwitter />
             </a>
-            <a href="https://www.instagram.com/rosehkzlhn/" target="_blank" rel="noopener noreferrer" style={socialLinkStyle}>
+            <a href="#" style={{ color: "#ffa500", fontSize: "1.5rem" }}>
               <FaInstagram />
             </a>
           </div>
         </div>
 
-        <form style={formStyle} onSubmit={handleSubmit}>
-          <div style={inputGroupStyle}>
-            <label style={labelStyle} htmlFor="name">{t.contact.name}</label>
+        <form onSubmit={handleSubmit} style={{
+          background: "rgba(10, 10, 10, 0.35)",
+          backdropFilter: "blur(15px)",
+          borderRadius: "22px",
+          padding: "30px",
+          border: "1.5px solid rgba(255, 255, 255, 0.10)",
+          boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+          flex: "2",
+          minWidth: "400px"
+        }}>
+          <div style={{ marginBottom: "20px" }}>
+            <label style={{
+              display: "block",
+              color: "#fff",
+              fontSize: "1rem",
+              marginBottom: "8px"
+            }}>
+              {t('contact.name')}
+            </label>
             <input
               type="text"
-              id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              style={inputStyle}
-              placeholder={t.contact.namePlaceholder}
-              required
+              style={{
+                width: "100%",
+                padding: "12px",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: "8px",
+                color: "#fff",
+                fontSize: "1rem"
+              }}
             />
-            {errors.name && <div style={errorStyle}>{t.contact.nameRequired}</div>}
+            {errors.name && (
+              <span style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "4px" }}>
+                {errors.name}
+              </span>
+            )}
           </div>
 
-          <div style={inputGroupStyle}>
-            <label style={labelStyle} htmlFor="email">{t.contact.email}</label>
+          <div style={{ marginBottom: "20px" }}>
+            <label style={{
+              display: "block",
+              color: "#fff",
+              fontSize: "1rem",
+              marginBottom: "8px"
+            }}>
+              {t('contact.email')}
+            </label>
             <input
               type="email"
-              id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              style={inputStyle}
-              placeholder={t.contact.emailPlaceholder}
-              required
+              style={{
+                width: "100%",
+                padding: "12px",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: "8px",
+                color: "#fff",
+                fontSize: "1rem"
+              }}
             />
-            {errors.email && <div style={errorStyle}>{t.contact.emailRequired}</div>}
+            {errors.email && (
+              <span style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "4px" }}>
+                {errors.email}
+              </span>
+            )}
           </div>
 
-          <div style={inputGroupStyle}>
-            <label style={labelStyle} htmlFor="subject">{t.contact.subject}</label>
+          <div style={{ marginBottom: "20px" }}>
+            <label style={{
+              display: "block",
+              color: "#fff",
+              fontSize: "1rem",
+              marginBottom: "8px"
+            }}>
+              {t('contact.subject')}
+            </label>
             <input
               type="text"
-              id="subject"
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              style={inputStyle}
-              placeholder={t.contact.subjectPlaceholder}
-              required
+              style={{
+                width: "100%",
+                padding: "12px",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: "8px",
+                color: "#fff",
+                fontSize: "1rem"
+              }}
             />
-            {errors.subject && <div style={errorStyle}>{t.contact.subjectRequired}</div>}
+            {errors.subject && (
+              <span style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "4px" }}>
+                {errors.subject}
+              </span>
+            )}
           </div>
 
-          <div style={inputGroupStyle}>
-            <label style={labelStyle} htmlFor="message">{t.contact.message}</label>
+          <div style={{ marginBottom: "20px" }}>
+            <label style={{
+              display: "block",
+              color: "#fff",
+              fontSize: "1rem",
+              marginBottom: "8px"
+            }}>
+              {t('contact.message')}
+            </label>
             <textarea
-              id="message"
               name="message"
               value={formData.message}
               onChange={handleChange}
-              style={textareaStyle}
-              placeholder={t.contact.messagePlaceholder}
-              required
+              style={{
+                width: "100%",
+                padding: "12px",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                borderRadius: "8px",
+                color: "#fff",
+                fontSize: "1rem",
+                minHeight: "150px",
+                resize: "vertical"
+              }}
             />
-            {errors.message && <div style={errorStyle}>{t.contact.messageRequired}</div>}
+            {errors.message && (
+              <span style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "4px" }}>
+                {errors.message}
+              </span>
+            )}
           </div>
 
-          <motion.button
+          <button
             type="submit"
-            style={buttonStyle}
             disabled={isSubmitting}
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 0 20px rgba(255, 215, 0, 0.3)"
+            style={{
+              width: "100%",
+              padding: "14px",
+              background: "#ffa500",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "1rem",
+              fontWeight: "600",
+              cursor: isSubmitting ? "not-allowed" : "pointer",
+              opacity: isSubmitting ? 0.7 : 1,
+              transition: "all 0.3s ease"
             }}
-            whileTap={{ scale: 0.98 }}
           >
-            {isSubmitting ? t.contact.sending : t.contact.send}
-          </motion.button>
+            {isSubmitting ? t('contact.sending') : t('contact.send')}
+          </button>
 
           {submitSuccess && (
-            <div style={successMessageStyle}>
-              {t.contact.success}
+            <div style={{
+              marginTop: "20px",
+              padding: "12px",
+              background: "rgba(46, 213, 115, 0.2)",
+              color: "#2ed573",
+              borderRadius: "8px",
+              fontSize: "1rem",
+              textAlign: "center"
+            }}>
+              {t('contact.success')}
             </div>
           )}
         </form>

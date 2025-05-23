@@ -1,11 +1,15 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { FaCode, FaServer, FaMobile, FaTools } from "react-icons/fa";
+import { FaCode, FaServer, FaMobile, FaTools, FaRobot, FaChartLine, FaPython, FaBrain, FaSearch, FaLightbulb } from "react-icons/fa";
+import { SiRos } from "react-icons/si";
 import { motion } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
+import MobileNavBar from '../components/MobileNavBar';
+import { useMediaQuery } from 'react-responsive';
 
 const NelerYapabilirim = () => {
   const { t, language } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(null);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     console.log('Current language:', language);
@@ -16,32 +20,176 @@ const NelerYapabilirim = () => {
   const abilities = useMemo(() => {
     console.log('Creating abilities array with:', t);
     return [
-    {
-      icon: <FaCode />,
-      title: t('abilities.aiTitle'),
-      description: t('abilities.aiDesc'),
-      color: '#FF6B6B'
-    },
-    {
-      icon: <FaServer />,
-      title: t('abilities.simulationTitle'),
-      description: t('abilities.simulationDesc'),
-      color: '#4ECDC4'
-    },
-    {
-      icon: <FaMobile />,
-      title: t('abilities.autonomousTitle'),
-      description: t('abilities.autonomousDesc'),
-      color: '#45B7D1'
-    },
-    {
-      icon: <FaTools />,
-      title: t('abilities.uiuxTitle'),
-      description: t('abilities.uiuxDesc'),
-      color: '#FFD93D'
-    }
+      {
+        icon: <FaCode />,
+        title: t('abilities.aiTitle'),
+        description: t('abilities.aiDesc'),
+        color: '#FF6B6B'
+      },
+      {
+        icon: <FaServer />,
+        title: t('abilities.simulationTitle'),
+        description: t('abilities.simulationDesc'),
+        color: '#4ECDC4'
+      },
+      {
+        icon: <FaMobile />,
+        title: t('abilities.autonomousTitle'),
+        description: t('abilities.autonomousDesc'),
+        color: '#45B7D1'
+      },
+      {
+        icon: <FaTools />,
+        title: t('abilities.uiuxTitle'),
+        description: t('abilities.uiuxDesc'),
+        color: '#FFD93D'
+      }
     ];
-  }, [t, language]);
+  }, [t]);
+
+  if (isMobile) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        width: '100vw',
+        background: '#181f2a',
+        padding: '18px 0 64px 0',
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        <div style={{
+          width: '100%',
+          padding: '0 10px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          alignItems: 'center',
+        }}>
+          <div style={{
+            background: '#23232b',
+            borderRadius: 10,
+            padding: '18px 12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            width: '100%',
+            maxWidth: 800,
+          }}>
+            <h1 style={{
+              color: '#ffa500',
+              fontSize: 22,
+              marginBottom: 12,
+              textAlign: 'center',
+              fontWeight: 700
+            }}>
+              {t('abilities.title')}
+            </h1>
+          </div>
+
+          <div style={{
+            background: '#23232b',
+            borderRadius: 14,
+            padding: '20px 16px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}>
+            <h2 style={{
+              color: '#ffa500',
+              fontSize: 20,
+              marginBottom: 16,
+              textAlign: 'center',
+              fontWeight: 700
+            }}>
+              {t('abilities.aiTitle')}
+            </h2>
+            <div style={{
+              color: '#fff',
+              fontSize: 15,
+              lineHeight: 1.6,
+              marginBottom: 20
+            }}>
+              {t('abilities.aiDesc')}
+            </div>
+          </div>
+
+          <div style={{
+            background: '#23232b',
+            borderRadius: 14,
+            padding: '20px 16px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}>
+            <h2 style={{
+              color: '#ffa500',
+              fontSize: 20,
+              marginBottom: 16,
+              textAlign: 'center',
+              fontWeight: 700
+            }}>
+              {t('abilities.simulationTitle')}
+            </h2>
+            <div style={{
+              color: '#fff',
+              fontSize: 15,
+              lineHeight: 1.6,
+              marginBottom: 20
+            }}>
+              {t('abilities.simulationDesc')}
+            </div>
+          </div>
+
+          <div style={{
+            background: '#23232b',
+            borderRadius: 14,
+            padding: '20px 16px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}>
+            <h2 style={{
+              color: '#ffa500',
+              fontSize: 20,
+              marginBottom: 16,
+              textAlign: 'center',
+              fontWeight: 700
+            }}>
+              {t('abilities.autonomousTitle')}
+            </h2>
+            <div style={{
+              color: '#fff',
+              fontSize: 15,
+              lineHeight: 1.6,
+              marginBottom: 20
+            }}>
+              {t('abilities.autonomousDesc')}
+            </div>
+          </div>
+
+          <div style={{
+            background: '#23232b',
+            borderRadius: 14,
+            padding: '20px 16px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+          }}>
+            <h2 style={{
+              color: '#ffa500',
+              fontSize: 20,
+              marginBottom: 16,
+              textAlign: 'center',
+              fontWeight: 700
+            }}>
+              {t('abilities.uiuxTitle')}
+            </h2>
+            <div style={{
+              color: '#fff',
+              fontSize: 15,
+              lineHeight: 1.6,
+              marginBottom: 20
+            }}>
+              {t('abilities.uiuxDesc')}
+            </div>
+          </div>
+        </div>
+        <MobileNavBar />
+      </div>
+    );
+  }
 
   return (
     <motion.div

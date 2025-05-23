@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from '../context/LanguageContext';
 import "../styles/Home.css";
+import MobileNavBar from '../components/MobileNavBar';
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
@@ -20,107 +21,134 @@ const Home = () => {
   const isMobile = useIsMobile();
 
   if (isMobile) {
-    // SADECE MOBİL İÇİN ÖZEL TASARIM
     return (
-      <div style={{
-        minHeight: '100vh',
-        width: '100vw',
-        background: '#181818',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        padding: '32px 0 0 0',
-      }}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            objectFit: 'cover',
-            zIndex: 0,
-            opacity: 0.7
-          }}
-        >
-          <source src="/1.mp4" type="video/mp4" />
-        </video>
-        <div style={{
-          zIndex: 2,
-          width: '100%',
-          maxWidth: 420,
-          margin: '0 auto',
-          padding: '0 10px',
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        style={{
+          minHeight: '100vh',
+          width: '100vw',
+          background: '#181f2a',
+          padding: '18px 0 64px 0',
+          overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '18px',
-        }}>
-          <h1 style={{
-            fontSize: '1.3rem',
-            fontWeight: 800,
-            color: '#ffb366',
-            margin: '0 0 2px 0',
-            textAlign: 'center',
-            letterSpacing: '0.5px',
-            textShadow: '0 2px 8px #0007'
-          }}>{`${t('home.greeting')} ${t('home.name')}`}</h1>
-          <span style={{
-            fontSize: '1.05rem',
-            color: '#ffbe88',
-            fontWeight: 600,
-            textAlign: 'center',
-            marginBottom: '0',
-          }}>{t('home.title')}</span>
-          <div style={{
-            fontSize: '0.95rem',
-            color: '#fff',
-            textAlign: 'center',
-            margin: '12px 0 0 0',
-            lineHeight: 1.5,
-            textShadow: '0 1px 8px #0006',
-          }}>{t('home.description')}</div>
-          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-            <button
+        }}
+      >
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          style={{
+            width: '100%',
+            padding: '0 14px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '18px',
+            alignItems: 'center',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          <motion.h1
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            style={{
+              fontSize: '2rem',
+              fontWeight: 800,
+              color: '#ffa500',
+              margin: '16px 0 6px 0',
+              textAlign: 'center',
+              letterSpacing: '0.2px',
+            }}
+          >
+            {`${t('home.greeting')} ${t('home.name')}`}
+          </motion.h1>
+          <motion.span
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            style={{
+              fontSize: '1.1rem',
+              color: '#ffbe88',
+              fontWeight: 600,
+              textAlign: 'center',
+              marginBottom: 4,
+            }}
+          >
+            {t('home.title')}
+          </motion.span>
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            style={{
+              fontSize: '1rem',
+              color: '#fff',
+              textAlign: 'center',
+              lineHeight: 1.5,
+              marginBottom: 12,
+              padding: '0 8px',
+            }}
+          >
+            {t('home.description')}
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
+              width: '100%',
+              maxWidth: 320,
+            }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/portfolio')}
               style={{
-                border: '2px solid #ffb366',
-                color: '#ffb366',
-                background: 'transparent',
-                fontWeight: 600,
-                fontSize: '0.95rem',
-                borderRadius: '8px',
-                padding: '8px 18px',
-                minWidth: '100px',
-                transition: 'all 0.22s cubic-bezier(.4,0,.2,1)',
+                width: '100%',
+                padding: '12px',
+                fontSize: '1rem',
+                borderRadius: 10,
+                border: 'none',
+                background: 'linear-gradient(45deg, #ff9f33 0%, #ffb366 100%)',
+                color: '#181818',
+                fontWeight: 700,
+                boxShadow: '0 4px 12px rgba(255, 159, 51, 0.2)',
               }}
             >
               {`> ${t('nav.portfolio')}`}
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/about')}
               style={{
+                width: '100%',
+                padding: '12px',
+                fontSize: '1rem',
+                borderRadius: 10,
                 border: '2px solid #ffb366',
-                color: '#ffb366',
                 background: 'transparent',
-                fontWeight: 600,
-                fontSize: '0.95rem',
-                borderRadius: '8px',
-                padding: '8px 18px',
-                minWidth: '100px',
-                transition: 'all 0.22s cubic-bezier(.4,0,.2,1)',
+                color: '#ffb366',
+                fontWeight: 700,
+                boxShadow: '0 4px 12px rgba(255, 159, 51, 0.1)',
               }}
             >
               {`> ${t('nav.about')}`}
-            </button>
-          </div>
-        </div>
-      </div>
+            </motion.button>
+          </motion.div>
+        </motion.div>
+        <MobileNavBar />
+      </motion.div>
     );
   }
 

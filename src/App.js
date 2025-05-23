@@ -72,21 +72,21 @@ const LoadingScreen = () => {
   );
 };
 
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
-  React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  return isMobile;
-};
-
-const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Simüle edilmiş yükleme süresi
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -94,40 +94,44 @@ const App = () => {
 
   return (
     <LanguageProvider>
-      <Router>
+      <Router future={{ v7_startTransition: true }}>
         {/* Arka Plan Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            objectFit: "cover",
-            zIndex: 0,
-            filter: "brightness(0.7) blur(1.5px)",
-            pointerEvents: "none"
-          }}
-        >
-          <source src="/1.mp4" type="video/mp4" />
-        </video>
+        {!isMobile && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              objectFit: "cover",
+              zIndex: 0,
+              filter: "brightness(0.7) blur(1.5px)",
+              pointerEvents: "none"
+            }}
+          >
+            <source src="/1.mp4" type="video/mp4" />
+          </video>
+        )}
         {/* Karartma Overlay */}
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "radial-gradient(ellipse at 60% 40%, rgba(255,200,80,0.15) 0%, rgba(13,27,42,0.7) 100%)",
-            zIndex: 1,
-            pointerEvents: "none"
-          }}
-        />
+        {!isMobile && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              background: "radial-gradient(ellipse at 60% 40%, rgba(255,200,80,0.15) 0%, rgba(13,27,42,0.7) 100%)",
+              zIndex: 1,
+              pointerEvents: "none"
+            }}
+          />
+        )}
         <AnimatePresence mode="wait">
           {isLoading ? (
             <LoadingScreen key="loading" />
@@ -147,8 +151,8 @@ const App = () => {
                 </AnimatePresence>
               </main>
               {!isMobile && <RightBar />}
-              <LanguageSelector />
-              {/* Mobilde menü barı da gösterilmeyecek */}
+              {!isMobile && <LanguageSelector />}
+              {isMobile && <MobileNavBar />}
             </div>
           )}
         </AnimatePresence>

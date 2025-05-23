@@ -163,79 +163,80 @@ const Skills = () => {
     backdropFilter: "blur(10px)"
   };
 
+  const isMobile = window.innerWidth <= 768;
+
   return (
-    <div style={containerStyle}>
-      <motion.h1 style={titleStyle} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
+    <div style={isMobile ? {
+      minHeight: '100vh',
+      width: '100vw',
+      background: '#181f2a',
+      padding: '18px 0',
+      color: '#fff',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+    } : containerStyle}>
+      <motion.h1 style={isMobile ? { fontSize: 22, marginBottom: 18 } : titleStyle} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
         {t.skills.title}
       </motion.h1>
-
-      <div style={sectionStyle}>
-        <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}>
+      <div style={isMobile ? { width: '100%', padding: '0 6px', display: 'flex', flexDirection: 'column', gap: 18 } : { width: '100%', maxWidth: 1100, display: 'flex', flexDirection: 'column', gap: 36, padding: '0 12px' }}>
+        <div style={isMobile ? { fontSize: 15, marginBottom: 10, gap: 6 } : sectionTitleStyle}>
           <span style={{ color: "#ffd700" }}>✦</span>
           {t.skills.programming}
-        </motion.h2>
-        <div style={skillsGridStyle} className="skills-grid">
+        </div>
+        <div style={isMobile ? { display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : skillsGridStyle}>
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              style={skillCardStyle}
+              style={isMobile ? { background: 'rgba(20,20,22,0.28)', borderRadius: 10, padding: '12px 8px', minWidth: 110, minHeight: 70, boxShadow: '0 2px 8px 0 #000a', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #23232b', marginRight: 4 } : skillCardStyle}
               whileHover={{ scale: 1.06, boxShadow: "0 8px 32px 0 #ffd70033" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div style={skillHeaderStyle}>
-                <span style={iconStyle}>{skill.icon}</span>
-                <span style={skillNameStyle}>{skill.name}</span>
+              <div style={isMobile ? { fontSize: 18, color: '#ffd700', marginBottom: 4 } : skillHeaderStyle}>
+                <span style={isMobile ? { fontSize: 18, color: '#ffd700', marginBottom: 4 } : iconStyle}>{skill.icon}</span>
+                <span style={isMobile ? { fontSize: 11, color: '#fff', fontWeight: 500 } : skillNameStyle}>{skill.name}</span>
               </div>
-              <div style={progressBarContainerStyle}>
+              <div style={isMobile ? { width: '100%', padding: '0 6px', display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : progressBarContainerStyle}>
                 {skill.animated ? (
                   <motion.div
-                    style={progressBarStyle(reactPercent)}
+                    style={isMobile ? { width: '100%', padding: '0 6px', display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : progressBarStyle(reactPercent)}
                     initial={{ width: 0 }}
                     animate={{ width: `${reactPercent}%` }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                   />
                 ) : (
-                  <div style={progressBarStyle(skill.level)} />
+                  <div style={isMobile ? { width: '100%', padding: '0 6px', display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : progressBarStyle(skill.level)} />
                 )}
               </div>
-              <div style={skillLevelStyle}>
+              <div style={isMobile ? { fontSize: 11, color: 'rgba(255, 255, 255, 0.8)', marginTop: 5, textAlign: 'right' } : skillLevelStyle}>
                 {skill.animated ? `${reactPercent}%` : `${skill.level}%`}
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
-
-      <div style={sectionStyle}>
-        <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}>
+        <div style={isMobile ? { fontSize: 15, marginBottom: 10, gap: 6 } : sectionTitleStyle}>
           <span style={{ color: "#ffd700" }}>✦</span>
           {t.skills.ai}
-        </motion.h2>
-        <div style={skillsGridStyle} className="skills-grid">
+        </div>
+        <div style={isMobile ? { display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : skillsGridStyle}>
           {researchSkills.map((skill, index) => (
             <motion.div
               key={index}
-              style={{
-                ...skillCardStyle,
-                textAlign: "center",
-                padding: "28px"
-              }}
+              style={isMobile ? { background: 'rgba(20,20,22,0.28)', borderRadius: 10, padding: '12px 8px', minWidth: 110, minHeight: 70, boxShadow: '0 2px 8px 0 #000a', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #23232b', marginRight: 4 } : skillCardStyle}
               whileHover={{ scale: 1.06, boxShadow: "0 8px 32px 0 #ffd70033" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <span style={{ fontSize: "2.1rem", color: "#ffd700", display: "block", marginBottom: 10 }}>{skill.icon}</span>
-              <span style={{ fontSize: "1.2rem", color: "#fff", fontWeight: "500" }}>{skill.name}</span>
+              <span style={isMobile ? { fontSize: 18, color: '#ffd700', marginBottom: 4 } : iconStyle}>{skill.icon}</span>
+              <span style={isMobile ? { fontSize: 11, color: '#fff', fontWeight: 500 } : skillNameStyle}>{skill.name}</span>
             </motion.div>
           ))}
         </div>
-      </div>
-
-      <div style={sectionStyle}>
-        <motion.h2 style={sectionTitleStyle} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}>
+        <div style={isMobile ? { fontSize: 15, marginBottom: 10, gap: 6 } : sectionTitleStyle}>
           <span style={{ color: "#ffd700" }}>✦</span>
           {t.skills.softSkills}
-        </motion.h2>
-        <div style={skillsGridStyle} className="skills-grid">
+        </div>
+        <div style={isMobile ? { display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : skillsGridStyle}>
           {[
             { name: t.skills.problemSolving, level: 95 },
             { name: t.skills.teamwork, level: 90 },
@@ -246,17 +247,17 @@ const Skills = () => {
           ].map((skill, index) => (
             <motion.div
               key={index}
-              style={skillCardStyle}
+              style={isMobile ? { background: 'rgba(20,20,22,0.28)', borderRadius: 10, padding: '12px 8px', minWidth: 110, minHeight: 70, boxShadow: '0 2px 8px 0 #000a', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #23232b', marginRight: 4 } : skillCardStyle}
               whileHover={{ scale: 1.06, boxShadow: "0 8px 32px 0 #ffd70033" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div style={skillHeaderStyle}>
-                <span style={skillNameStyle}>{skill.name}</span>
+              <div style={isMobile ? { fontSize: 11, color: '#fff', fontWeight: 500 } : skillHeaderStyle}>
+                <span style={isMobile ? { fontSize: 11, color: '#fff', fontWeight: 500 } : skillNameStyle}>{skill.name}</span>
               </div>
-              <div style={progressBarContainerStyle}>
-                <div style={progressBarStyle(skill.level)} />
+              <div style={isMobile ? { width: '100%', padding: '0 6px', display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : progressBarContainerStyle}>
+                <div style={isMobile ? { width: '100%', padding: '0 6px', display: 'flex', flexDirection: 'row', gap: 8, overflowX: 'auto', paddingBottom: 4 } : progressBarStyle(skill.level)} />
               </div>
-              <div style={skillLevelStyle}>{skill.level}%</div>
+              <div style={isMobile ? { fontSize: 11, color: 'rgba(255, 255, 255, 0.8)', marginTop: 5, textAlign: 'right' } : skillLevelStyle}>{skill.level}%</div>
             </motion.div>
           ))}
         </div>

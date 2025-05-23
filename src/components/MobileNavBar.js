@@ -1,18 +1,21 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaHome, FaUser, FaTools, FaFolderOpen, FaEnvelope } from "react-icons/fa";
-
-const navItems = [
-  { path: "/", icon: <FaHome />, label: "Anasayfa" },
-  { path: "/about", icon: <FaUser />, label: "Hakkımda" },
-  { path: "/skills", icon: <FaTools />, label: "Yetenekler" },
-  { path: "/portfolio", icon: <FaFolderOpen />, label: "Portfolyo" },
-  { path: "/contact", icon: <FaEnvelope />, label: "İletişim" },
-];
+import { FaHome, FaUser, FaTools, FaLightbulb, FaBriefcase, FaEnvelope } from "react-icons/fa";
+import { useLanguage } from '../context/LanguageContext';
 
 const MobileNavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navItems = [
+    { path: "/", icon: <FaHome />, label: t('nav.home') },
+    { path: "/about", icon: <FaUser />, label: t('nav.about') },
+    { path: "/skills", icon: <FaTools />, label: t('nav.skills') },
+    { path: "/neleryapabilirim", icon: <FaLightbulb />, label: t('nav.whatICan') },
+    { path: "/portfolio", icon: <FaBriefcase />, label: t('nav.portfolio') },
+    { path: "/contact", icon: <FaEnvelope />, label: t('nav.contact') }
+  ];
 
   // Sadece mobilde göster
   React.useEffect(() => {
