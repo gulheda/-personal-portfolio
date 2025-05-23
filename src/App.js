@@ -10,6 +10,7 @@ import NelerYapabilirim from "./pages/NelerYapabilirim";
 import Sidebar from "./components/Sidebar";
 import RightBar from "./components/RightBar";
 import LanguageSelector from "./components/LanguageSelector";
+import MobileNavBar from "./components/MobileNavBar";
 import { LanguageProvider } from "./context/LanguageContext";
 import "./styles/App.css";
 import "./styles/MobileResponsive.css";
@@ -179,6 +180,7 @@ const App = () => {
               </main>
               <RightBar />
               <LanguageSelector />
+              <MobileNavBar />
             </div>
           )}
         </AnimatePresence>
