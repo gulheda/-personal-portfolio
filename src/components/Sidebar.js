@@ -75,9 +75,7 @@ const Sidebar = () => {
     overflowX: "hidden",
     transition: "width 0.3s cubic-bezier(.4,0,.2,1)",
     "@media (max-width: 768px)": {
-      width: isExpanded ? "100%" : "80px",
-      padding: "20px 0",
-      gap: "25px"
+      display: "none"
     }
   };
 

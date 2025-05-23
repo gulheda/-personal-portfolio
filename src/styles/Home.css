@@ -357,15 +357,32 @@
 }
 
 @media (max-width: 600px) {
+  .glow-title,
+  .home-main-title-fixed,
   .home-main-title {
-    font-size: 2rem;
+    font-size: 1.5rem !important;
+    margin-top: 18px !important;
   }
-  .home-main-subtitle {
-    font-size: 1.1rem;
+  .home-main-subtitle,
+  .home-main-subtitle-inline {
+    font-size: 1rem !important;
+  }
+  .home-description,
+  .home-description-fixed {
+    font-size: 0.95rem !important;
+    margin-top: 18px !important;
+    margin-bottom: 12px !important;
   }
   .home-content-flex {
-    padding: 0 4vw;
-    gap: 18px;
+    gap: 18px !important;
+    padding: 0 2vw !important;
+  }
+  .home-nav-btn,
+  button {
+    font-size: 0.95rem !important;
+    padding: 10px 18px !important;
+    min-width: 120px !important;
+    border-radius: 8px !important;
   }
   .home-icon-box {
     width: 54px;
