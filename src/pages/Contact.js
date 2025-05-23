@@ -351,7 +351,7 @@ const Contact = () => {
               gap: "15px"
             }}>
               <FaEnvelope style={{ color: "#ffa500", fontSize: "1.5rem" }} />
-              <span>gulheda@example.com</span>
+              <span>kizilhangulheda@gmail.com</span>
             </div>
             <div style={{
               display: "flex",
@@ -359,7 +359,7 @@ const Contact = () => {
               gap: "15px"
             }}>
               <FaPhone style={{ color: "#ffa500", fontSize: "1.5rem" }} />
-              <span>+90 555 123 4567</span>
+              <span>+90 537 957 3947</span>
             </div>
             <div style={{
               display: "flex",
@@ -367,7 +367,7 @@ const Contact = () => {
               gap: "15px"
             }}>
               <FaMapMarkerAlt style={{ color: "#ffa500", fontSize: "1.5rem" }} />
-              <span>İstanbul, Türkiye</span>
+              <span>Denizli, Türkiye</span>
             </div>
           </div>
           <div style={{
