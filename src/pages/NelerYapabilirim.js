@@ -14,30 +14,30 @@ const NelerYapabilirim = () => {
   }, [language, t]);
 
   const abilities = useMemo(() => {
-    console.log('Creating abilities array with:', t.abilities);
+    console.log('Creating abilities array with:', t);
     return [
     {
       icon: <FaCode />,
-      title: t.abilities.aiTitle,
-      description: t.abilities.aiDesc,
+      title: t('abilities.aiTitle'),
+      description: t('abilities.aiDesc'),
       color: '#FF6B6B'
     },
     {
       icon: <FaServer />,
-      title: t.abilities.simulationTitle,
-      description: t.abilities.simulationDesc,
+      title: t('abilities.simulationTitle'),
+      description: t('abilities.simulationDesc'),
       color: '#4ECDC4'
     },
     {
       icon: <FaMobile />,
-      title: t.abilities.autonomousTitle,
-      description: t.abilities.autonomousDesc,
+      title: t('abilities.autonomousTitle'),
+      description: t('abilities.autonomousDesc'),
       color: '#45B7D1'
     },
     {
       icon: <FaTools />,
-      title: t.abilities.uiuxTitle,
-      description: t.abilities.uiuxDesc,
+      title: t('abilities.uiuxTitle'),
+      description: t('abilities.uiuxDesc'),
       color: '#FFD93D'
     }
     ];
@@ -79,7 +79,7 @@ const NelerYapabilirim = () => {
           textAlign: 'center',
         }}
       >
-        {t.abilities.title}
+        {t('abilities.title')}
       </motion.h1>
 
       <div className="neler-grid" style={{
@@ -181,3 +181,6 @@ const NelerYapabilirim = () => {
 };
 
 export default NelerYapabilirim; 
+
+
+

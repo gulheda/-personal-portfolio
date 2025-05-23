@@ -266,7 +266,7 @@ const Contact = () => {
             <FaMapMarkerAlt style={iconStyle} />
             <div>
               <h3 style={{ margin: "0 0 5px 0", color: "#ffa500" }}>{t.contact.location}</h3>
-              <p style={{ margin: 0 }}>İstanbul, Türkiye</p>
+              <p style={{ margin: 0 }}>Denizli,Türkiye</p>
             </div>
           </div>
           <div style={socialLinksStyle}>

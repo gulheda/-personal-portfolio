@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from '../context/LanguageContext';
@@ -7,19 +7,6 @@ import "../styles/Home.css";
 const Home = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
-
-  // Klavye kısayolu: ⌘ + '+' tuşuna bastığında veya Ctrl+Shift+= kombinasyonunda portfolio sayfasına git
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Mac: metaKey + '+', Windows/Linux: ctrlKey + Shift + '='
-      if ((e.metaKey || e.ctrlKey) && (e.key === '+' || (e.key === '=' && e.shiftKey))) {
-        e.preventDefault();
-        navigate('/portfolio');
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [navigate]);
 
   return (
     <motion.div
@@ -84,7 +71,7 @@ const Home = () => {
             marginBottom: '-10px',
           }}
         >
-          Merhaba, ben Gülheda
+          {`${t('home.greeting')} ${t('home.name')}`}
         </motion.h1>
 
         <motion.span
@@ -97,7 +84,7 @@ const Home = () => {
             marginLeft: '-10px',
           }}
         >
-          Bilgisayar Mühendisliği Öğrencisi
+          {t('home.title')}
         </motion.span>
 
         <div
@@ -119,16 +106,14 @@ const Home = () => {
               lineHeight: 1.6,
             }}
           >
-            Yapay zekâ, simülasyon ve otonom sistemlere tutkuyla odaklanıyorum.
-            Teknofest'te İHA simülasyonları geliştiriyor, karmaşık problemleri sade
-            ve etkili çözümlere dönüştürüyorum.
+            {t('home.description')}
           </motion.div>
 
           <div style={{ display: 'flex', gap: '16px' }}>
             <motion.button
               whileHover={{ scale: 1.08, boxShadow: '0 0 24px 0 #ffb36688' }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => navigate("/portfolio")}
+              onClick={() => navigate('/portfolio')}
               style={{
                 border: '2px solid #ffb366',
                 color: '#ffb366',
@@ -140,12 +125,12 @@ const Home = () => {
                 transition: 'all 0.22s cubic-bezier(.4,0,.2,1)',
               }}
             >
-              &gt; Projelerime Göz At
+              {`> ${t('nav.portfolio')}`}
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.08, boxShadow: '0 0 24px 0 #ffb36688' }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => navigate("/about")}
+              onClick={() => navigate('/about')}
               style={{
                 border: '2px solid #ffb366',
                 color: '#ffb366',
@@ -157,11 +142,9 @@ const Home = () => {
                 transition: 'all 0.22s cubic-bezier(.4,0,.2,1)',
               }}
             >
-              &gt; Ben Kimim?
+              {`> ${t('nav.about')}`}
             </motion.button>
           </div>
-
-          <div style={{ fontSize: '1.2rem', color: '#fff' }}>[⌘+] ile keşfet</div>
         </div>
       </div>
     </motion.div>
@@ -169,5 +152,11 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
+
+
 
 

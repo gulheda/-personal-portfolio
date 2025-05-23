@@ -43,11 +43,8 @@ const Skills = () => {
     marginBottom: "40px",
     fontFamily: 'Montserrat, Arial, sans-serif',
     textAlign: "center",
-    background: "linear-gradient(90deg, #ffa500 10%, #fff 90%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "0 4px 32px rgba(255, 165, 0, 0.18), 0 2px 8px #fff2",
-    filter: "blur(0.2px)"
+    color: "#ffa500",
+    textShadow: "0 2px 8px rgba(255, 165, 0, 0.3)"
   };
 
   const sectionStyle = {
@@ -67,11 +64,8 @@ const Skills = () => {
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    background: "linear-gradient(90deg, #ffd700 10%, #fff 90%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "0 2px 16px rgba(255, 215, 0, 0.13), 0 1px 4px #fff2",
-    filter: "blur(0.2px)"
+    color: "#ffa500",
+    textShadow: "0 2px 8px rgba(255, 165, 0, 0.3)"
   };
 
   const skillsGridStyle = {

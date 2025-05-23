@@ -16,9 +16,13 @@ export const LanguageProvider = ({ children }) => {
     setLanguage(lang);
   };
 
-  // Çeviri objesini context'e ekle!
-  const t = translations[language];
-  console.log('LanguageContext - Aktif çeviriler:', t);
+  // t fonksiyonu: çeviri anahtarlarını string olarak alır
+  const t = (key) => {
+    return key
+      .split('.')
+      .reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : null), translations[language])
+      || '';
+  };
 
   return (
     <LanguageContext.Provider value={{ language, changeLanguage, t }}>
@@ -35,4 +39,4 @@ export const useLanguage = () => {
   return context;
 };
 
-export default LanguageContext; 
+export default LanguageContext;
