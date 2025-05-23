@@ -5,10 +5,24 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translations';
 
+// Mobilde hiç render etme
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return isMobile;
+};
+
 const Sidebar = () => {
+  const isMobile = useIsMobile();
   const { language } = useLanguage();
   const t = translations[language];
   const [isExpanded, setIsExpanded] = useState(false);
+
+  if (isMobile) return null;
 
   const iconBoxStyle = {
     display: "flex",
